@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madjo — Barbier · Hammam Chott, Tunis</title>
+<meta name="description" content="Madjo, barbier à Hammam Chott. Réservation en ligne : coupes, barbes et rituels. Tous les jours de 8h à 23h, chaque coupe dure 45 minutes.">
+<link rel="icon" type="image/png" href="media/favicon-128.png">
+<link rel="apple-touch-icon" href="media/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,100;1,9..144,300..700,100&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MADJO — barbier · Hammam Chott, Tunis
+   Palette chaude : Espresso · Crème · Sable · Terracotta · Ambre · Olive
+   Signature  : « l'arc de lame » (courbe de lame droite)
+   ============================================================ */
+:root{
+  --espresso:#231611;
+  --espresso-2:#2E1D15;
+  --ink:#241A14;
+  --cream:#F8F1E3;
+  --cream-2:#FDF8EE;
+  --sand:#EBDFC7;
+  --sand-2:#E2D3B6;
+  --terra:#BC5B3A;
+  --terra-deep:#9E4528;
+  --amber:#E2A63E;
+  --amber-bright:#F0B85B;
+  --amber-soft:rgba(226,166,62,.16);
+  --olive:#6F6A44;
+  --olive-deep:#56522F;
+  --olive-soft:rgba(111,106,68,.16);
+  --green:#4E7A4B;
+  --green-deep:#3A5F38;
+  --green-soft:rgba(78,122,75,.18);
+  --line:rgba(36,26,20,.14);
+  --line-soft:rgba(36,26,20,.08);
+  --mut:rgba(36,26,20,.66);
+  --faint:rgba(36,26,20,.56);
+  --on-dark:rgba(248,241,227,.82);
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --r:20px;
+  --r-lg:26px;
+  --shadow:0 1px 0 rgba(36,26,20,.04),0 22px 44px -30px rgba(36,26,20,.4);
+  --pattern:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23241A14' stroke-width='1'%3E%3Cpath d='M0 80 L80 0 L160 80 L80 160 Z'/%3E%3Cpath d='M23.43 23.43 L136.57 23.43 L136.57 136.57 L23.43 136.57 Z'/%3E%3Cpath d='M23.43 23.43 L-23.43 23.43 L-23.43 -23.43 L23.43 -23.43 Z'/%3E%3Cpath d='M33.14 0 L0 33.14 L-33.14 0 L0 -33.14 Z'/%3E%3Ccircle cx='80' cy='80' r='2.2' fill='%23241A14'/%3E%3Ccircle cx='0' cy='0' r='1.6' fill='%23241A14'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23E2A63E' stroke-width='1'%3E%3Cpath d='M0 80 L80 0 L160 80 L80 160 Z'/%3E%3Cpath d='M23.43 23.43 L136.57 23.43 L136.57 136.57 L23.43 136.57 Z'/%3E%3Cpath d='M23.43 23.43 L-23.43 23.43 L-23.43 -23.43 L23.43 -23.43 Z'/%3E%3Cpath d='M33.14 0 L0 33.14 L-33.14 0 L0 -33.14 Z'/%3E%3Ccircle cx='80' cy='80' r='2.2' fill='%23E2A63E'/%3E%3Ccircle cx='0' cy='0' r='1.6' fill='%23E2A63E'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:92px;}
+body{
+  font-family:var(--sans);
+  background:var(--cream);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.62;
+  font-size:16px;
+  overflow-x:hidden;
+}
+::selection{background:var(--amber);color:var(--espresso);}
+img,video{display:block;max-width:100%;}
+a{color:inherit;}
+button,a,input,textarea,select,.select-card{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+section{position:relative;}
+
+/* ---------- reveal on scroll ---------- */
+html.js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .75s cubic-bezier(.22,.68,.34,1);transition-delay:var(--d,0s);}
+html.js .rv.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none;}}
+
+/* ---------- typography ---------- */
+.eyebrow{
+  font-size:11px;font-weight:800;
+  letter-spacing:.34em;text-transform:uppercase;
+  color:var(--terra);
+  display:inline-flex;align-items:center;gap:12px;
+}
+.eyebrow::before,.eyebrow::after{content:"";width:26px;height:1.5px;background:var(--terra);}
+.eyebrow.light{color:var(--amber-bright);}
+.eyebrow.light::before,.eyebrow.light::after{background:var(--amber);}
+.sec-head{text-align:center;max-width:660px;margin:0 auto 52px;}
+.sec-head h2{
+  font-family:var(--serif);
+  font-variation-settings:'SOFT' 100;
+  font-weight:520;
+  font-size:clamp(33px,4.6vw,50px);
+  line-height:1.06;
+  letter-spacing:-.015em;
+  margin:18px auto 0;
+}
+.sec-head h2 em{font-style:italic;color:var(--terra);}
+.sec-head p{margin:16px auto 0;color:var(--mut);max-width:50ch;font-size:16px;}
+.section{padding:100px 0;}
+
+/* ---------- buttons ---------- */
+.btn{
+  font-family:var(--sans);
+  font-size:14px;font-weight:800;
+  letter-spacing:.04em;
+  border:none;border-radius:999px;
+  padding:15px 30px;
+  cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .22s ease,background .22s ease,box-shadow .22s ease,border-color .22s ease,color .22s ease;
+  text-decoration:none;
+  position:relative;
+}
+.btn svg{width:16px;height:16px;flex:none;transition:transform .22s ease;}
+.btn:hover svg.arrow{transform:translateX(3px);}
+.btn-amber{background:var(--amber);color:var(--espresso);box-shadow:0 14px 30px -16px rgba(226,166,62,.9);}
+.btn-amber:hover{background:var(--amber-bright);transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--cream);border:1.5px solid rgba(248,241,227,.42);backdrop-filter:blur(4px);}
+.btn-ghost:hover{border-color:var(--cream);color:var(--amber-bright);transform:translateY(-2px);}
+.btn-ghost-dark{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+.btn-ghost-dark:hover{border-color:var(--terra);color:var(--terra);background:rgba(188,91,58,.06);}
+.btn-terra{background:var(--terra);color:var(--cream);box-shadow:0 14px 30px -16px rgba(188,91,58,.85);}
+.btn-terra:hover{background:var(--terra-deep);transform:translateY(-2px);}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(248,241,227,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s ease,box-shadow .3s ease,background .3s ease;
+}
+.site-header.scrolled{border-bottom-color:var(--line-soft);box-shadow:0 14px 34px -28px rgba(36,26,20,.5);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0;}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);}
+.brand-mark{width:40px;height:40px;flex:none;color:var(--terra);}
+.brand-name{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:24px;font-weight:600;line-height:1;letter-spacing:.01em;}
+.brand-name small{display:block;font-family:var(--sans);font-size:8.5px;font-weight:800;letter-spacing:.42em;text-transform:uppercase;color:var(--terra);margin-top:5px;}
+.main-nav{display:flex;align-items:center;gap:24px;}
+.main-nav a:not(.btn){
+  font-size:13.5px;font-weight:700;letter-spacing:.02em;
+  color:var(--mut);text-decoration:none;
+  position:relative;padding:4px 0;
+}
+.main-nav a:not(.btn)::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:0;border-radius:2px;
+  background:var(--terra);transition:width .25s ease;
+}
+.main-nav a:not(.btn):hover{color:var(--ink);}
+.main-nav a:not(.btn):hover::after{width:100%;}
+.nav-cta{padding:11px 22px;font-size:13px;}
+.nav-toggle{
+  display:none;background:none;border:1px solid var(--line);border-radius:999px;
+  width:42px;height:42px;cursor:pointer;align-items:center;justify-content:center;
+  color:var(--ink);
+}
+.nav-toggle svg{width:20px;height:20px;}
+.nav-toggle .x{display:none;}
+body.nav-open .nav-toggle .burger{display:none;}
+body.nav-open .nav-toggle .x{display:block;}
+body.nav-open .main-nav{display:flex;}
+
+/* ============================================================
+   HERO (vidéo pleine page)
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;align-items:center;
+  overflow:hidden;
+  color:var(--cream);
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(180deg,rgba(35,22,17,.72) 0%,rgba(35,22,17,.42) 42%,rgba(35,22,17,.85) 100%);
+}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(52% 44% at 50% 40%,rgba(226,166,62,.22),transparent 72%);
+}
+.hero-inner{
+  position:relative;z-index:2;
+  width:100%;
+  padding:150px 0 110px;
+  text-align:center;
+}
+.hero-eyebrow{
+  color:var(--amber-bright);
+  opacity:0;animation:rise .8s .1s ease forwards;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{background:var(--amber);}
+@keyframes rise{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero-title{
+  font-family:var(--serif);
+  font-variation-settings:'SOFT' 100;
+  font-weight:520;
+  font-size:clamp(44px,7vw,84px);
+  line-height:1.02;
+  letter-spacing:-.02em;
+  margin:26px auto 0;
+  max-width:16ch;
+  opacity:0;animation:rise .9s .22s ease forwards;
+}
+.hero-title em{
+  font-style:italic;
+  color:var(--amber-bright);
+  position:relative;
+}
+.hero-title em::after{
+  content:"";position:absolute;left:0;right:0;bottom:-10px;height:9px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 9' preserveAspectRatio='none'%3E%3Cpath d='M0 7 Q50 0 100 5 T200 3' fill='none' stroke='%23E2A63E' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size:100% 100%;
+  opacity:.85;
+  transform-origin:left;
+  animation:sweep 1s .9s cubic-bezier(.22,.68,.34,1) backwards;
+}
+@keyframes sweep{from{transform:scaleX(0);opacity:0;}to{transform:scaleX(1);opacity:.85;}}
+.hero-sub{
+  margin:34px auto 0;max-width:52ch;color:var(--on-dark);font-size:17px;
+  opacity:0;animation:rise .8s .4s ease forwards;
+}
+.hero-ctas{
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:36px;
+  opacity:0;animation:rise .8s .52s ease forwards;
+}
+.hero-ctas .btn{padding:17px 34px;font-size:15px;}
+.hero-meta{
+  display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:52px;
+  font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark);
+  opacity:0;animation:rise .8s .64s ease forwards;
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px;}
+.hero-meta svg{width:15px;height:15px;color:var(--amber-bright);}
+.hero-scroll{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;
+  color:var(--on-dark);font-size:10px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:9px;text-decoration:none;
+  opacity:0;animation:rise .8s .8s ease forwards;
+}
+.hero-scroll .dot{
+  width:24px;height:38px;border:1.5px solid rgba(248,241,227,.5);border-radius:14px;position:relative;
+}
+.hero-scroll .dot::after{
+  content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:3px;
+  background:var(--amber-bright);transform:translateX(-50%);
+  animation:wheel 1.8s ease-in-out infinite;
+}
+@keyframes wheel{0%,100%{transform:translate(-50%,0);opacity:1;}50%{transform:translate(-50%,9px);opacity:.35;}}
+
+/* ---------- ticker ---------- */
+.ticker{
+  background:var(--espresso);
+  border-top:1px solid rgba(226,166,62,.25);
+  border-bottom:1px solid rgba(226,166,62,.25);
+  overflow:hidden;padding:13px 0;
+  position:relative;z-index:2;
+}
+.ticker-track{
+  display:flex;gap:0;width:max-content;
+  animation:tick 32s linear infinite;
+}
+.ticker:hover .ticker-track{animation-play-state:paused;}
+@keyframes tick{to{transform:translateX(-50%);}}
+.ticker-item{
+  display:inline-flex;align-items:center;gap:26px;padding-right:26px;
+  font-size:12.5px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;
+  color:rgba(248,241,227,.72);white-space:nowrap;
+}
+.ticker-item svg{width:15px;height:15px;color:var(--amber);}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+#services{background:linear-gradient(180deg,var(--cream),var(--sand) 34%,var(--sand) 66%,var(--cream));}
+#services::before{content:"";position:absolute;inset:0;background-image:var(--pattern);background-size:170px 170px;opacity:.04;pointer-events:none;}
+.services-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;position:relative;z-index:1;}
+.svc{
+  grid-column:span 2;
+  background:var(--cream-2);
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-lg);
+  padding:30px 28px 26px;
+  display:flex;flex-direction:column;
+  box-shadow:var(--shadow);
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+  position:relative;overflow:hidden;
+}
+.svc:hover{transform:translateY(-5px);border-color:rgba(226,166,62,.55);}
+.svc::before{
+  content:"";position:absolute;right:-60px;top:-60px;width:170px;height:170px;
+  background-image:var(--pattern);background-size:72px 72px;opacity:.05;
+  mask-image:radial-gradient(closest-side,black 40%,transparent 100%);
+  -webkit-mask-image:radial-gradient(closest-side,black 40%,transparent 100%);
+}
+.svc-icon{
+  width:52px;height:52px;border-radius:16px;
+  display:grid;place-items:center;
+  background:var(--amber-soft);color:var(--terra);
+  margin-bottom:20px;
+}
+.svc-icon svg{width:25px;height:25px;}
+.svc:nth-child(2) .svc-icon{background:var(--olive-soft);color:var(--olive-deep);}
+.svc:nth-child(3) .svc-icon{background:var(--green-soft);color:var(--green-deep);}
+.svc:nth-child(4) .svc-icon{background:var(--amber-soft);color:var(--olive-deep);}
+.svc:nth-child(5) .svc-icon{background:rgba(188,91,58,.14);color:var(--terra-deep);}
+.svc:nth-child(6) .svc-icon{background:var(--sand-2);color:var(--olive-deep);}
+.svc-name{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:22px;font-weight:600;color:var(--ink);}
+.svc-desc{font-size:13.5px;color:var(--mut);margin-top:6px;flex:1;}
+.svc-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:22px;padding-top:17px;border-top:1px dashed var(--line);
+}
+.svc-dur{font-size:11.5px;font-weight:800;color:var(--olive-deep);display:flex;align-items:center;gap:6px;letter-spacing:.06em;background:var(--olive-soft);padding:5px 11px;border-radius:999px;}
+.svc-dur svg{width:12px;height:12px;}
+.svc-price{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:27px;font-weight:600;color:var(--terra);}
+.svc-price small{font-size:12.5px;font-family:var(--sans);font-weight:800;color:var(--faint);}
+.svc-book{
+  margin-top:16px;width:100%;
+  font-size:13px;padding:12px 18px;
+  background:transparent;color:var(--ink);
+  border:1.5px solid var(--line);
+}
+.svc-book:hover{background:var(--espresso);border-color:var(--espresso);color:var(--cream);}
+
+/* ============================================================
+   POURQUOI NOUS (bande foncée)
+   ============================================================ */
+#pourquoi{
+  background:var(--espresso);
+  color:var(--cream);
+  overflow:hidden;
+}
+#pourquoi::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--pattern-dark);background-size:150px 150px;opacity:.06;
+  pointer-events:none;
+}
+#pourquoi::after{
+  content:"";position:absolute;top:-140px;right:-140px;width:460px;height:460px;
+  background:radial-gradient(closest-side,rgba(226,166,62,.16),transparent 70%);
+  pointer-events:none;
+}
+#pourquoi .sec-head h2{color:var(--cream);}
+#pourquoi .sec-head h2 em{color:var(--amber-bright);}
+#pourquoi .sec-head p{color:var(--on-dark);}
+.why-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;position:relative;z-index:1;}
+.why-card{
+  background:rgba(248,241,227,.045);
+  border:1px solid rgba(248,241,227,.1);
+  border-radius:var(--r-lg);
+  padding:28px 24px;
+  transition:transform .28s ease,background .28s ease,border-color .28s ease;
+}
+.why-card:hover{transform:translateY(-4px);background:rgba(248,241,227,.08);border-color:rgba(226,166,62,.4);}
+.why-ic{
+  width:50px;height:50px;border-radius:16px;
+  display:grid;place-items:center;
+  background:var(--amber-soft);color:var(--amber-bright);
+  margin-bottom:18px;
+}
+.why-ic svg{width:24px;height:24px;}
+.why-card h3{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:19px;font-weight:600;color:var(--cream);}
+.why-card p{font-size:13.5px;color:var(--on-dark);margin-top:7px;}
+
+/* ============================================================
+   BARBIERS
+   ============================================================ */
+.barbers-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}
+.barber-card{
+  background:var(--cream-2);
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-lg);
+  padding:34px 26px 28px;
+  text-align:center;
+  position:relative;
+  box-shadow:var(--shadow);
+  transition:transform .28s ease,border-color .28s ease;
+  display:flex;flex-direction:column;align-items:center;
+}
+.barber-card:hover{transform:translateY(-5px);border-color:rgba(226,166,62,.55);}
+.barber-card.owner{border-color:rgba(226,166,62,.55);}
+.owner-tag{
+  position:absolute;top:20px;right:20px;
+  font-size:9.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--espresso);background:var(--amber);padding:5px 12px;border-radius:999px;
+}
+.avatar{
+  width:96px;height:96px;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--serif);font-size:34px;font-weight:600;
+  color:var(--cream);
+  position:relative;
+  background:linear-gradient(135deg,var(--terra),var(--terra-deep));
+}
+.avatar.a2{background:linear-gradient(135deg,var(--olive),var(--olive-deep));}
+.avatar.a3{background:linear-gradient(135deg,var(--amber),var(--terra));}
+.avatar::after{
+  content:"";position:absolute;inset:-9px;
+  border:1.5px dashed rgba(226,166,62,.6);
+  border-radius:50%;
+}
+.bb-name{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:22px;font-weight:600;color:var(--ink);margin-top:20px;}
+.bb-role{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-top:5px;}
+.bb-spec{font-size:13.5px;color:var(--mut);margin-top:10px;line-height:1.5;}
+.bb-rating{margin-top:16px;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:var(--ink);border:1px solid var(--line);padding:6px 14px;border-radius:999px;}
+.bb-rating .star{color:var(--amber);letter-spacing:2px;font-size:12px;}
+.bb-rating small{color:var(--faint);font-weight:700;}
+
+/* ============================================================
+   RÉSERVATION
+   ============================================================ */
+#reservation{background:linear-gradient(180deg,var(--cream),var(--sand) 30%,var(--sand) 70%,var(--cream));}
+#reservation::before{content:"";position:absolute;inset:0;background-image:var(--pattern);background-size:170px 170px;opacity:.04;pointer-events:none;}
+.bk-wrap{max-width:1080px;margin:0 auto;position:relative;z-index:1;}
+
+.bk-progress{
+  display:flex;align-items:center;justify-content:center;
+  padding:6px 0 40px;
+}
+.bp-step{display:flex;align-items:center;gap:11px;}
+.bp-num{
+  width:34px;height:34px;border-radius:50%;flex:none;
+  border:1.5px solid var(--line);
+  display:grid;place-items:center;
+  font-size:12px;font-weight:800;color:var(--faint);
+  transition:all .3s ease;
+}
+.bp-label{font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);transition:color .3s ease;white-space:nowrap;}
+.bp-link{width:56px;height:1.5px;background:var(--line);margin:0 16px;position:relative;overflow:hidden;}
+.bp-link::after{content:"";position:absolute;inset:0;background:var(--terra);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+.bp-step.done .bp-num{background:var(--terra);border-color:var(--terra);color:var(--cream);}
+.bp-step.done .bp-label{color:var(--ink);}
+.bp-step.done + .bp-link::after{transform:scaleX(1);}
+.bp-step.active .bp-num{border-color:var(--terra);color:var(--terra);box-shadow:0 0 0 6px rgba(188,91,58,.14);}
+.bp-step.active .bp-label{color:var(--terra);}
+.bk-progress-compact{display:none;align-items:baseline;justify-content:center;gap:14px;padding:4px 0 28px;}
+.pc-count{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:38px;font-weight:600;color:var(--ink);line-height:1;}
+.pc-count small{font-family:var(--sans);font-size:13px;font-weight:800;color:var(--faint);letter-spacing:.06em;}
+.pc-line{flex:1;max-width:80px;height:1.5px;background:var(--line);position:relative;overflow:hidden;}
+.pc-line i{position:absolute;inset:0;background:var(--terra);transform-origin:left;transform:scaleX(0);transition:transform .4s ease;}
+.pc-label{font-size:11.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);}
+
+.bk-layout{display:grid;grid-template-columns:minmax(0,66%) minmax(0,34%);gap:30px;align-items:start;}
+
+.bk-panel{
+  background:var(--cream-2);
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-lg);
+  padding:clamp(24px,3.2vw,42px);
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.bk-panel::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:4px;
+  background:linear-gradient(90deg,var(--terra),var(--amber) 55%,transparent);
+  opacity:.85;
+}
+.bk-panel::after{
+  content:"";position:absolute;right:-80px;bottom:-80px;width:230px;height:230px;
+  background-image:var(--pattern);background-size:64px 64px;opacity:.05;
+  mask-image:radial-gradient(closest-side,black 45%,transparent 100%);
+  -webkit-mask-image:radial-gradient(closest-side,black 45%,transparent 100%);
+  pointer-events:none;
+}
+.bk-step{display:none;position:relative;z-index:1;}
+.bk-step.active{display:block;animation:stepIn .36s cubic-bezier(.22,.68,.34,1);}
+@keyframes stepIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.bk-step h2{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:clamp(27px,3vw,33px);font-weight:600;color:var(--ink);letter-spacing:-.01em;}
+.step-sub{margin-top:6px;color:var(--mut);font-size:14.5px;max-width:54ch;}
+.step-sub::after{content:"";display:block;width:58px;height:3px;background:var(--amber);margin:20px 0 26px;border-radius:3px;}
+
+.select-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.select-card{
+  position:relative;text-align:left;
+  background:transparent;
+  border:1.5px solid var(--line-soft);
+  border-radius:16px;
+  padding:17px 17px 15px;
+  cursor:pointer;
+  font-family:var(--sans);color:var(--ink);
+  transition:all .22s ease;
+}
+.select-card:hover{border-color:rgba(226,166,62,.7);transform:translateY(-2px);}
+.select-card.selected{
+  border-color:var(--terra);
+  background:rgba(188,91,58,.06);
+  box-shadow:inset 0 0 0 1px var(--terra);
+}
+.select-card .check{
+  position:absolute;top:14px;right:14px;
+  width:23px;height:23px;border-radius:50%;
+  border:1.5px solid var(--line);
+  display:grid;place-items:center;
+  color:transparent;font-size:12px;
+  transition:all .25s ease;
+  z-index:2;
+}
+.select-card.selected .check{background:var(--terra);border-color:var(--terra);color:var(--cream);}
+.select-card.selected .check svg{animation:pop .3s cubic-bezier(.2,1.4,.4,1);}
+@keyframes pop{0%{transform:scale(.4);}100%{transform:scale(1);}}
+.s-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-right:30px;}
+.s-top .s-name{font-weight:800;font-size:15.5px;}
+.s-top .s-cat{font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--olive-deep);background:var(--olive-soft);padding:4px 10px;border-radius:999px;}
+.s-desc{font-size:12.5px;color:var(--mut);margin-top:4px;}
+.s-foot{margin-top:13px;display:flex;align-items:center;justify-content:space-between;padding-top:11px;border-top:1px dashed var(--line);}
+.s-foot .t{font-size:11px;font-weight:800;color:var(--olive-deep);display:flex;align-items:center;gap:6px;background:var(--olive-soft);padding:4px 10px;border-radius:999px;}
+.s-foot .t svg{width:11px;height:11px;}
+.s-foot .p{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:21px;font-weight:600;color:var(--terra);}
+.s-foot .p small{font-size:12px;font-family:var(--sans);font-weight:800;color:var(--faint);}
+
+.barber-grid-bk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.b-barber{display:flex;flex-direction:column;align-items:center;text-align:center;padding:20px 14px 16px;}
+.b-barber .av-mini{
+  width:58px;height:58px;border-radius:50%;flex:none;
+  display:grid;place-items:center;
+  font-family:var(--serif);font-size:22px;font-weight:600;color:var(--cream);
+  background:linear-gradient(135deg,var(--terra),var(--terra-deep));
+  position:relative;
+}
+.b-barber .av-mini.b2{background:linear-gradient(135deg,var(--olive),var(--olive-deep));}
+.b-barber .av-mini.b3{background:linear-gradient(135deg,var(--amber),var(--terra));}
+.b-barber .av-mini::after{content:"";position:absolute;inset:-5px;border:1.5px dashed rgba(226,166,62,.55);border-radius:50%;}
+.b-barber .n{font-weight:800;font-size:15px;margin-top:11px;}
+.b-barber .r{font-size:11.5px;color:var(--mut);margin-top:1px;}
+.b-barber .s{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-deep);margin-top:6px;}
+
+.date-scroll{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 16px;scrollbar-width:none;}
+.date-scroll::-webkit-scrollbar{display:none;}
+.date-card{
+  flex:none;width:92px;
+  padding:13px 6px 12px;
+  border:1.5px solid var(--line-soft);
+  border-radius:14px;
+  background:transparent;cursor:pointer;text-align:center;
+  transition:all .25s ease;
+  font-family:var(--sans);color:var(--ink);
+}
+.date-card:hover{border-color:rgba(226,166,62,.7);transform:translateY(-2px);}
+.date-card.selected{background:var(--terra);border-color:var(--terra);color:var(--cream);}
+.date-card .d-top{font-size:9.5px;font-weight:800;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;}
+.date-card.selected .d-top{color:rgba(248,241,227,.85);}
+.date-card .d-day{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:28px;font-weight:600;line-height:1.15;color:var(--ink);}
+.date-card.selected .d-day{color:var(--cream);}
+.date-card .d-month{font-size:9px;font-weight:800;letter-spacing:.16em;color:var(--faint);}
+.date-card.selected .d-month{color:rgba(248,241,227,.85);}
+
+.time-block{margin-top:16px;}
+.tb-title{font-size:10.5px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.tb-title::after{content:"";flex:1;height:1px;background:var(--line-soft);}
+.time-grid{display:flex;flex-wrap:wrap;gap:10px;}
+.time-empty{
+  width:100%;text-align:center;padding:16px 12px;border-radius:12px;
+  background:var(--sand);color:var(--mut);font-size:13px;font-weight:600;
+}
+.time-slot{
+  min-width:82px;
+  padding:11px 8px;
+  border:1.5px solid var(--line-soft);
+  border-radius:12px;
+  background:transparent;
+  font-family:var(--sans);font-size:14px;font-weight:800;
+  color:var(--ink);
+  cursor:pointer;position:relative;text-align:center;
+  transition:all .2s ease;
+}
+.time-slot.available{
+  background:var(--green-soft);
+  border-color:rgba(78,122,75,.45);
+  color:var(--green-deep);
+}
+.time-slot.available:hover{border-color:var(--green);transform:translateY(-2px);}
+.time-slot.selected{background:var(--terra);border-color:var(--terra);color:var(--cream);transform:translateY(-2px);}
+.time-slot.unavailable{
+  opacity:.32;
+  color:var(--faint);
+  cursor:not-allowed;
+  text-decoration:line-through;
+  background:rgba(36,26,20,.035);
+  border-style:dashed;
+}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--mut);}
+.legend span{display:inline-flex;align-items:center;gap:7px;}
+.legend .sw{width:13px;height:13px;border-radius:4px;display:inline-block;}
+.legend .sw.on{background:var(--green-soft);border:1px solid var(--green);}
+.legend .sw.off{background:rgba(36,26,20,.04);border:1px dashed var(--line);opacity:.4;}
+.avail-note{font-size:12.5px;color:var(--faint);margin-top:12px;display:flex;align-items:center;gap:7px;}
+.avail-note svg{width:13px;height:13px;color:var(--olive-deep);flex:none;}
+
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:7px;}
+.field label .opt{color:var(--faint);letter-spacing:.08em;font-weight:600;}
+.field input,.field textarea{
+  font-family:var(--sans);font-size:15px;color:var(--ink);
+  background:var(--cream);border:1.5px solid var(--line-soft);border-radius:12px;
+  padding:13px 16px;outline:none;width:100%;
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(36,26,20,.35);}
+.field input:focus,.field textarea:focus{border-color:var(--terra);box-shadow:0 0 0 4px rgba(188,91,58,.12);background:var(--cream-2);}
+.field textarea{resize:vertical;min-height:86px;}
+.field .hint{font-size:12px;color:var(--faint);}
+.field.error input,.field.error textarea{border-color:var(--terra);}
+.field.error .err-msg{display:block;color:var(--terra);font-size:12px;font-weight:700;}
+.err-msg{display:none;}
+.submit-error{
+  display:none;margin-top:20px;padding:13px 16px;border-radius:12px;
+  background:rgba(188,91,58,.12);border:1px solid rgba(188,91,58,.35);
+  color:var(--terra-deep);font-size:13px;font-weight:700;line-height:1.5;
+}
+.submit-error.show{display:block;}
+
+/* ---------- mes réservations ---------- */
+.bk-my{display:flex;justify-content:center;margin-top:44px;}
+.btn-my{padding:13px 24px;font-size:13.5px;border-radius:999px;}
+.my-card{text-align:left;padding-top:clamp(36px,6vw,50px);}
+.my-card::after{opacity:.6;}
+.my-x{
+  position:absolute;top:16px;right:16px;z-index:2;
+  width:38px;height:38px;border-radius:999px;
+  border:1.5px solid var(--line);background:transparent;
+  color:var(--mut);font-size:19px;line-height:1;cursor:pointer;
+  display:grid;place-items:center;padding:0;
+  transition:border-color .2s ease,color .2s ease,background .2s ease,transform .2s ease;
+}
+.my-x:hover{border-color:var(--terra);color:var(--terra);background:rgba(188,91,58,.06);transform:rotate(90deg);}
+.my-head{text-align:center;margin-bottom:24px;}
+.my-head-icon{
+  width:58px;height:58px;margin:0 auto 16px;border-radius:18px;
+  display:grid;place-items:center;
+  background:var(--olive-soft);color:var(--olive-deep);
+}
+.my-head-icon svg{width:25px;height:25px;}
+.my-card h2{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:28px;font-weight:600;color:var(--ink);line-height:1.12;}
+.my-head p{color:var(--mut);font-size:14px;max-width:40ch;margin:8px auto 0;}
+.my-head::after{
+  content:"";display:block;width:58px;height:3px;background:var(--amber);
+  margin:18px auto 0;border-radius:3px;
+}
+.my-phone{display:flex;gap:10px;margin:22px 0 4px;align-items:stretch;}
+.my-phone .phone-wrap{flex:1;}
+.my-phone .phone-wrap input{
+  padding-left:76px;font-size:15px;height:48px;
+  background:var(--cream);border:1.5px solid var(--line-soft);border-radius:12px;
+}
+.my-phone .phone-wrap input:focus{border-color:var(--terra);box-shadow:0 0 0 4px rgba(188,91,58,.12);background:var(--cream-2);}
+.my-phone .btn{padding:12px 20px;font-size:13px;border-radius:12px;height:48px;}
+.my-list{margin-top:14px;text-align:left;}
+#myMsg{margin-top:12px;}
+#myMsg .my-err,#myMsg .my-note{margin-top:0;}
+.my-state{
+  padding:22px 18px;text-align:center;color:var(--mut);font-size:13.5px;
+  background:var(--sand);border-radius:14px;margin:0;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.my-state svg{width:26px;height:26px;color:var(--terra);}
+.my-err{color:#B3352B;font-size:12.5px;font-weight:600;background:rgba(179,53,43,.07);border:1px solid rgba(179,53,43,.22);border-radius:12px;padding:11px 14px;}
+.my-note{color:var(--green-deep);font-size:12.5px;font-weight:700;background:var(--green-soft);border:1px solid rgba(78,122,75,.3);border-radius:12px;padding:11px 14px;}
+.my-bk{
+  display:flex;align-items:center;gap:14px;
+  border:1px solid var(--line-soft);border-radius:18px;
+  padding:14px 16px;margin-top:12px;background:#fff;
+  box-shadow:var(--shadow);
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.my-bk:hover{transform:translateY(-2px);box-shadow:0 18px 40px -28px rgba(36,26,20,.5);}
+.my-bk.cancelled{opacity:.62;background:var(--cream);}
+.my-bk.cancelled:hover{transform:none;box-shadow:var(--shadow);}
+.my-chip{
+  flex:none;width:56px;border-radius:14px;overflow:hidden;
+  background:var(--espresso);color:var(--cream);text-align:center;padding:8px 0 7px;
+}
+.my-chip .c-day{display:block;font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.05;color:var(--amber-bright);}
+.my-chip .c-mon{display:block;font-size:8.5px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;margin-top:3px;}
+.my-chip.past{background:var(--sand-2);color:var(--mut);}
+.my-chip.past .c-day{color:var(--terra-deep);}
+.my-bk-inf{min-width:0;flex:1;}
+.my-bk-svc{font-weight:800;font-size:14.5px;color:var(--ink);}
+.my-bk-meta{font-size:12.5px;color:var(--mut);margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.my-bk-meta svg{width:12px;height:12px;color:var(--olive-deep);}
+.my-bk-ref{font-size:11px;color:var(--faint);letter-spacing:.05em;margin-top:2px;}
+.my-bk.cancelled .my-bk-svc{text-decoration:line-through;}
+.my-bk-side{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.my-tag{font-size:9.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:999px;}
+.my-tag.on{background:var(--green-soft);color:var(--green-deep);}
+.my-tag.off{background:var(--sand-2);color:var(--mut);}
+.my-cancel{flex:none;padding:8px 15px;font-size:12px;border-radius:999px;border-color:rgba(188,91,58,.45);color:var(--terra-deep);}
+.my-cancel:hover{background:rgba(188,91,58,.08);border-color:var(--terra);}
+.my-cf{display:flex;flex-direction:column;align-items:stretch;gap:8px;flex:none;width:170px;}
+.my-cf-txt{font-size:12px;font-weight:800;color:var(--terra-deep);text-align:center;letter-spacing:.02em;}
+.my-cf .btn{width:100%;justify-content:center;padding:9px 12px;font-size:12.5px;border-radius:999px;}
+.my-actions{margin-top:26px;display:flex;justify-content:center;}
+@media (max-width:430px){
+  .my-phone{flex-direction:column;gap:10px;}
+  .my-phone .btn{width:100%;}
+  .my-bk{flex-wrap:wrap;}
+  .my-chip{width:50px;}
+  .my-bk-side{width:100%;flex-direction:row;justify-content:flex-end;align-items:center;}
+}
+.phone-wrap{position:relative;}
+.phone-wrap .prefix{
+  position:absolute;left:0;top:1.5px;bottom:1.5px;
+  display:flex;align-items:center;
+  padding:0 13px;
+  font-size:13px;font-weight:800;letter-spacing:.02em;
+  color:var(--olive-deep);
+  background:var(--olive-soft);
+  border-right:1.5px solid var(--line-soft);
+  border-top-left-radius:12px;border-bottom-left-radius:12px;
+  pointer-events:none;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.phone-wrap:focus-within .prefix{
+  color:var(--terra-deep);
+  background:rgba(226,166,62,.2);
+  border-right-color:rgba(188,91,58,.4);
+}
+.phone-wrap input{display:block;width:100%;padding-left:74px;}
+
+.step-nav{display:flex;align-items:center;justify-content:space-between;margin-top:34px;gap:14px;}
+.btn-back{
+  font-family:var(--sans);font-size:13px;font-weight:800;
+  color:var(--mut);background:transparent;border:none;cursor:pointer;
+  padding:10px 4px;display:flex;align-items:center;gap:6px;transition:color .2s ease;
+}
+.btn-back:hover{color:var(--terra);}
+.btn-back svg{width:15px;height:15px;}
+.btn-next{font-size:14px;padding:14px 32px;}
+
+.bk-summary{position:sticky;top:96px;display:flex;flex-direction:column;gap:16px;}
+.summary-card{
+  background:var(--espresso);
+  border-radius:var(--r-lg);
+  padding:28px 26px;
+  color:var(--cream);
+  position:relative;overflow:hidden;
+  box-shadow:0 26px 50px -30px rgba(35,22,17,.7);
+}
+.summary-card::before{
+  content:"";position:absolute;top:-70px;right:-70px;width:190px;height:190px;
+  background-image:var(--pattern-dark);background-size:72px 72px;opacity:.09;
+  mask-image:radial-gradient(closest-side,black 40%,transparent 100%);
+  -webkit-mask-image:radial-gradient(closest-side,black 40%,transparent 100%);
+  pointer-events:none;
+}
+.summary-title{font-size:10.5px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--amber-bright);display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+.summary-title::after{content:"";flex:1;height:1px;background:rgba(248,241,227,.14);}
+.sum-rows{display:flex;flex-direction:column;gap:15px;}
+.sum-row .k{font-size:9px;font-weight:800;letter-spacing:.24em;color:rgba(248,241,227,.5);text-transform:uppercase;}
+.sum-row .v{font-size:15px;font-weight:800;color:var(--cream);margin-top:3px;}
+.sum-row .v small{font-weight:500;color:rgba(248,241,227,.65);display:block;font-size:12.5px;}
+.sum-empty{font-style:italic;color:rgba(248,241,227,.5);font-weight:500;font-size:13px;}
+.sum-divider{height:1px;background:rgba(248,241,227,.16);margin:22px 0 18px;}
+.sum-total{display:flex;align-items:baseline;justify-content:space-between;}
+.sum-total .t-label{font-size:10px;font-weight:800;letter-spacing:.24em;color:rgba(248,241,227,.6);text-transform:uppercase;}
+.sum-total .t-value{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:38px;font-weight:600;color:var(--amber-bright);line-height:1;}
+.sum-total .t-value small{font-size:15px;font-family:var(--sans);font-weight:800;}
+.sum-note{font-size:11.5px;color:rgba(248,241,227,.55);line-height:1.6;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:16px;}
+.sum-note svg{width:13px;height:13px;color:var(--amber);flex:none;}
+
+.mobile-bar{
+  display:none;
+  position:fixed;left:0;right:0;bottom:0;z-index:55;
+  background:rgba(253,248,238,.97);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--line-soft);
+  padding:12px 20px calc(12px + env(safe-area-inset-bottom));
+  align-items:center;gap:16px;
+  box-shadow:0 -16px 34px -26px rgba(36,26,20,.5);
+}
+.mb-info{display:flex;flex-direction:column;line-height:1.25;min-width:0;}
+.mb-total{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:26px;font-weight:600;color:var(--terra);line-height:1;}
+.mb-dur{font-size:11.5px;color:var(--mut);font-weight:700;margin-top:2px;display:flex;align-items:center;gap:5px;}
+.mb-dur svg{width:12px;height:12px;color:var(--olive-deep);}
+.mb-cta{flex:1;justify-content:center;padding:14px 18px;font-size:13.5px;}
+
+/* ============================================================
+   CONFIRMATION
+   ============================================================ */
+.conf-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(35,22,17,.72);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:none;align-items:flex-start;justify-content:center;
+  padding:20px;
+  overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.conf-overlay.open{display:flex;}
+.conf-card{
+  width:100%;max-width:560px;margin:auto;
+  background:var(--cream-2);
+  border-radius:28px;
+  padding:clamp(30px,5vw,46px);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.6);
+  transform:scale(.86);opacity:0;
+  animation:confIn .5s cubic-bezier(.2,1.2,.4,1) forwards;
+}
+@keyframes confIn{to{transform:scale(1);opacity:1;}}
+.conf-card::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--pattern);background-size:110px 110px;opacity:.05;
+  pointer-events:none;
+}
+.conf-card::after{
+  content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);
+  width:420px;height:260px;
+  background:radial-gradient(closest-side,rgba(226,166,62,.22),transparent 75%);
+  pointer-events:none;
+}
+.conf-razor{
+  width:96px;height:96px;margin:0 auto 8px;
+  position:relative;
+  display:grid;place-items:center;
+}
+.conf-razor .sun{
+  position:absolute;inset:-26px;
+  background:radial-gradient(closest-side,var(--amber-soft),transparent 72%);
+  animation:spin 16s linear infinite;
+}
+.conf-razor .sun::after{
+  content:"";position:absolute;inset:0;
+  background-image:var(--pattern);background-size:48px 48px;opacity:.18;
+  mask-image:radial-gradient(closest-side,black 50%,transparent 100%);
+  -webkit-mask-image:radial-gradient(closest-side,black 50%,transparent 100%);
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.conf-razor svg{width:74px;height:74px;position:relative;z-index:1;overflow:visible;}
+.conf-razor .blade{fill:none;stroke:var(--terra);stroke-width:3;stroke-linecap:round;stroke-dasharray:260;stroke-dashoffset:260;animation:draw 1s .15s ease forwards;}
+.conf-razor .handle{fill:none;stroke:var(--amber);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:50;stroke-dashoffset:50;animation:draw .6s .95s ease forwards;}
+.conf-razor .tip{fill:var(--amber);opacity:0;animation:tipIn .3s 1.2s ease forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+@keyframes tipIn{to{opacity:1;}}
+.spark{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--amber);opacity:0;animation:spark 1.6s ease-in-out infinite;}
+@keyframes spark{
+  0%{transform:translate(0,0) scale(0);opacity:0;}
+  30%{opacity:1;}
+  100%{transform:translate(var(--tx),var(--ty)) scale(1);opacity:0;}
+}
+.conf-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;color:var(--olive-deep);display:inline-flex;align-items:center;gap:12px;}
+.conf-eyebrow::before,.conf-eyebrow::after{content:"";width:24px;height:1.5px;background:var(--olive);}
+.conf-card h2{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:clamp(30px,5vw,40px);font-weight:520;color:var(--ink);margin:14px auto 6px;line-height:1.1;}
+.conf-card h2 em{font-style:italic;color:var(--terra);}
+.conf-sub{color:var(--mut);font-size:14.5px;max-width:40ch;margin:0 auto;}
+.conf-ref{display:inline-block;margin-top:16px;font-size:12px;font-weight:800;letter-spacing:.22em;color:var(--terra);border:1.5px dashed var(--terra);border-radius:999px;padding:8px 20px;}
+.conf-details{margin:26px auto 0;max-width:420px;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:4px 0;text-align:left;}
+.conf-row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:11px 4px;border-bottom:1px dashed var(--line-soft);}
+.conf-row:last-child{border-bottom:none;}
+.conf-row .k{font-size:9px;font-weight:800;letter-spacing:.24em;color:var(--faint);text-transform:uppercase;padding-top:3px;flex:none;width:72px;}
+.conf-row .v{text-align:right;}
+.conf-row .v b{font-size:14.5px;font-weight:800;color:var(--ink);}
+.conf-row .v small{display:block;font-size:12px;color:var(--mut);}
+.conf-actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+.conf-note{display:none;margin-top:16px;font-size:12px;color:var(--mut);background:var(--sand);border-radius:12px;padding:11px 16px;}
+.conf-note.show{display:block;}
+.conf-note svg{width:14px;height:14px;color:var(--olive-deep);vertical-align:-2px;margin-right:6px;}
+
+/* ============================================================
+   GALERIE
+   ============================================================ */
+#galerie{background:linear-gradient(180deg,var(--cream),var(--sand) 34%,var(--sand) 66%,var(--cream));}
+#galerie::before{content:"";position:absolute;inset:0;background-image:var(--pattern);background-size:170px 170px;opacity:.04;pointer-events:none;}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;position:relative;z-index:1;}
+.gal-card{
+  position:relative;
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  aspect-ratio:1/1;
+  cursor:pointer;
+}
+.gal-card img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.22,.68,.34,1);
+}
+.gal-card:hover img{transform:scale(1.07);}
+.gal-cap{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:34px 18px 15px;
+  background:linear-gradient(180deg,transparent,rgba(35,22,17,.72));
+  color:var(--cream);
+  font-size:13px;font-weight:800;letter-spacing:.06em;
+  opacity:0;transform:translateY(8px);
+  transition:all .3s ease;
+}
+.gal-card:hover .gal-cap{opacity:1;transform:none;}
+
+/* ============================================================
+   AVIS (feedbacks)
+   ============================================================ */
+.testi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}
+.testi-card{
+  background:var(--cream-2);
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-lg);
+  padding:30px 28px;
+  box-shadow:var(--shadow);
+  position:relative;
+  display:flex;flex-direction:column;
+}
+.testi-card .q{
+  position:absolute;top:12px;right:24px;
+  font-family:var(--serif);font-size:80px;line-height:1;color:var(--terra);
+  opacity:.13;font-style:italic;
+}
+.stars{color:var(--amber);font-size:14px;letter-spacing:3px;margin-bottom:14px;}
+.testi-card blockquote{font-size:15px;color:var(--mut);font-style:italic;line-height:1.7;flex:1;}
+.testi-foot{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);}
+.testi-foot .ta{
+  width:44px;height:44px;border-radius:50%;flex:none;
+  display:grid;place-items:center;
+  font-family:var(--serif);font-weight:600;font-size:18px;color:var(--cream);
+  background:linear-gradient(135deg,var(--terra),var(--amber));
+}
+.testi-foot .tn{font-weight:800;font-size:14px;color:var(--ink);}
+.testi-foot .ts{font-size:11.5px;color:var(--faint);letter-spacing:.05em;}
+
+/* ============================================================
+   VIDÉOS
+   ============================================================ */
+#videos{background:var(--espresso);color:var(--cream);overflow:hidden;}
+#videos::before{content:"";position:absolute;inset:0;background-image:var(--pattern-dark);background-size:150px 150px;opacity:.06;pointer-events:none;}
+#videos::after{content:"";position:absolute;bottom:-160px;left:-160px;width:460px;height:460px;background:radial-gradient(closest-side,rgba(226,166,62,.14),transparent 70%);pointer-events:none;}
+#videos .sec-head h2{color:var(--cream);}
+#videos .sec-head h2 em{color:var(--amber-bright);}
+#videos .sec-head p{color:var(--on-dark);}
+.videos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;justify-content:center;position:relative;z-index:1;}
+.video-card{
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  background:rgba(248,241,227,.05);
+  border:1px solid rgba(248,241,227,.12);
+  box-shadow:0 26px 50px -30px rgba(0,0,0,.6);
+  aspect-ratio:9/16;
+  position:relative;
+}
+.video-card video{
+  width:100%;height:100%;object-fit:cover;
+}
+.video-card::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(248,241,227,.08);
+  border-radius:inherit;
+}
+.video-tag{
+  position:absolute;top:14px;left:14px;z-index:2;
+  font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--espresso);background:var(--amber);padding:5px 11px;border-radius:999px;
+}
+.videos-note{text-align:center;margin-top:34px;color:rgba(248,241,227,.6);font-size:13px;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:8px;}
+.videos-note svg{width:14px;height:14px;color:var(--amber);}
+
+/* ============================================================
+   CONTACT / HORAIRES / MAP
+   ============================================================ */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px;align-items:stretch;}
+.contact-card{
+  background:var(--cream-2);
+  border:1px solid var(--line-soft);
+  border-radius:var(--r-lg);
+  padding:34px 32px;
+  box-shadow:var(--shadow);
+}
+.contact-card h3{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:24px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.contact-card h3 svg{width:22px;height:22px;color:var(--terra);}
+.c-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px dashed var(--line-soft);}
+.c-item:first-of-type{padding-top:8px;}
+.c-item:last-of-type{border-bottom:none;}
+.c-ic{
+  width:46px;height:46px;border-radius:15px;flex:none;
+  display:grid;place-items:center;
+  background:var(--amber-soft);color:var(--terra);
+}
+.c-ic svg{width:21px;height:21px;}
+.c-item .k{font-size:10px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--olive-deep);}
+.c-item .v{margin-top:3px;font-size:16px;font-weight:700;color:var(--ink);line-height:1.5;}
+.c-item .v small{display:block;font-weight:500;color:var(--mut);font-size:13px;}
+.c-item a.v{text-decoration:none;color:var(--terra);}
+.c-item a.v:hover{text-decoration:underline;}
+.hours{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.hours .hr{display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--mut);}
+.hours .hr b{color:var(--ink);font-weight:800;}
+.hours .hr .today{color:var(--terra);}
+.hours .hr.closed{color:var(--faint);font-style:italic;}
+.map-card{
+  background:var(--espresso);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  position:relative;
+  min-height:100%;
+  display:flex;flex-direction:column;
+  box-shadow:0 26px 50px -30px rgba(35,22,17,.6);
+}
+.map-frame{flex:1;position:relative;min-height:380px;}
+.map-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.2) contrast(1.05);}
+.map-head{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:18px 24px;border-top:1px solid rgba(248,241,227,.14);flex-wrap:wrap;
+}
+.map-head .mf-t{font-size:13px;color:rgba(248,241,227,.7);}
+.map-head .mf-t b{color:var(--cream);}
+.map-head .btn{padding:11px 20px;font-size:12.5px;}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{background:var(--espresso);color:var(--cream);padding:56px 0 calc(36px + env(safe-area-inset-bottom));position:relative;overflow:hidden;}
+.site-footer::before{content:"";position:absolute;inset:0;background-image:var(--pattern-dark);background-size:140px 140px;opacity:.05;pointer-events:none;}
+.site-footer::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:linear-gradient(90deg,var(--terra),var(--amber),var(--terra));opacity:.8;}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;position:relative;z-index:1;}
+.foot-brand .brand{color:var(--cream);}
+.foot-brand .brand-mark{border-radius:9px;}
+.foot-brand p{color:rgba(248,241,227,.65);font-size:14px;margin-top:18px;max-width:36ch;line-height:1.75;}
+.foot-col h4{font-size:10.5px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--amber-bright);margin-bottom:18px;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.foot-col a,.foot-col li{font-size:14px;color:rgba(248,241,227,.7);text-decoration:none;}
+.foot-col a:hover{color:var(--amber-bright);}
+.foot-bottom{margin-top:48px;padding-top:26px;border-top:1px solid rgba(248,241,227,.14);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:rgba(248,241,227,.5);position:relative;z-index:1;}
+.foot-bottom b{color:rgba(248,241,227,.85);}
+.foot-razor{color:var(--amber);display:inline-flex;vertical-align:-2px;margin:0 6px;}
+
+/* ---------- focus ---------- */
+:focus-visible{outline:2.5px solid var(--terra);outline-offset:2.5px;border-radius:6px;}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1020px){
+  .services-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .svc{grid-column:span 1;}
+  .why-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .bk-layout{grid-template-columns:minmax(0,60%) minmax(0,40%);gap:24px;}
+  .bp-label{display:none;}
+  .bp-link{width:34px;margin:0 10px;}
+  .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:860px){
+  .main-nav{
+    display:none;
+    position:absolute;top:calc(100% + 0px);left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:4px;
+    background:rgba(253,248,238,.98);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    padding:18px 28px 26px;
+    box-shadow:0 34px 44px -32px rgba(36,26,20,.45);
+  }
+  .main-nav a:not(.btn){padding:11px 6px;font-size:15px;border-bottom:1px dashed var(--line-soft);}
+  .main-nav a:not(.btn)::after{display:none;}
+  .main-nav .nav-cta{margin-top:12px;border-bottom:none;justify-content:center;}
+  .nav-toggle{display:flex;}
+  .hero{padding-top:0;}
+  .bk-layout{grid-template-columns:1fr;}
+  .bk-summary{display:none;}
+  .mobile-bar{display:flex;}
+  .site-footer{padding-bottom:calc(112px + env(safe-area-inset-bottom));}
+  .bk-progress{display:none;}
+  .bk-progress-compact{display:flex;}
+  .contact-grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .foot-brand{grid-column:1/-1;}
+  .videos-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+}
+@media (max-width:620px){
+  .wrap{padding:0 20px;}
+  .services-grid,.testi-grid,.barbers-grid,.why-grid,.select-grid,.barber-grid-bk,.form-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+  .videos-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;}
+  .section{padding:72px 0;}
+  .site-header .nav-cta{display:none;}
+  .step-nav .btn-next{padding:13px 22px;font-size:13.5px;}
+  .hero-ctas .btn{padding:15px 26px;font-size:14px;}
+  .hero-meta{gap:16px;}
+  .date-card{width:82px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<script>document.documentElement.classList.add('js');</script>
+
+<!-- SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-razor" viewBox="0 0 64 64">
+      <g transform="rotate(-28 32 32)">
+        <path d="M8 50 Q14 20 46 13 L54 18 Q24 25 21 53 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="54" cy="15" r="4.5" fill="currentColor"/>
+      </g>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 4L8.5 15.5M14.5 14L20 20M8.5 8.5L13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-razor-blade" viewBox="0 0 24 24"><path d="M4 20 Q7 6 20 4 L21 7 Q9 10 8 20 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-towel" viewBox="0 0 24 24"><path d="M4 6h16v5H4zM4 11h16v7H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 14h16" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l2.2 6.1L20 12l-5.8 2.9L12 21l-2.2-6.1L4 12l5.8-2.9z" fill="currentColor"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4 10-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 1114 0c0 5.5-7 11-7 11z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a12 12 0 005.5 5.5L16 12l5 2v4a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z" fill="currentColor"/></symbol>
+    <symbol id="i-inst" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6z" fill="currentColor"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="18" cy="16" r="3" fill="currentColor"/></symbol>
+    <symbol id="i-fade" viewBox="0 0 24 24"><path d="M4 4h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 9h11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 14h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 19h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="#accueil" aria-label="Madjo, retour à l'accueil">
+      <img class="brand-mark" src="media/logo-round.png" alt="" width="40" height="40">
+      <div class="brand-name">Madjo<small>Barbier · Hammam Chott</small></div>
+    </a>
+    <nav class="main-nav" id="mainNav" aria-label="Navigation principale">
+      <a href="#accueil">Accueil</a>
+      <a href="#services">Services</a>
+      <a href="#barbiers">Barbiers</a>
+      <a href="#reservation">Réservation</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#avis">Avis</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-amber nav-cta" href="#reservation">Réserver</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <svg class="burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="accueil">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="media/gallery-1.jpg">
+      <source src="media/hero.mp4" type="video/mp4">
+    </video>
+    <div class="wrap hero-inner">
+      <span class="eyebrow hero-eyebrow">Barbier · Hammam Chott · Tunis</span>
+      <h1 class="hero-title">La coupe qui vous <em>ressemble.</em></h1>
+      <p class="hero-sub">Chez Madjo, chaque passage au fauteuil est un rituel : lame droite, serviette chaude, précision. Réservez en 30 secondes — sans attendre, tous les jours de 8h à 23h.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-amber" href="#reservation">
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12h16M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Réserver
+        </a>
+        <a class="btn btn-ghost" href="#services">Découvrir</a>
+      </div>
+      <div class="hero-meta">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-clock2"/></svg> Tous les jours · 8h – 23h</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-clock"/></svg> Chaque coupe · 45 min</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-shield"/></svg> Sans attente · Réservation</span>
+      </div>
+    </div>
+    <a class="hero-scroll" href="#services">
+      <span class="dot"></span>
+      Découvrir
+    </a>
+  </section>
+
+  <!-- ================= TICKER ================= -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item">Coupe classique <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Barbe à la lame <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Serviette chaude <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Rituel complet <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Lames neuves <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Sans attente <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Coupe classique <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Barbe à la lame <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Serviette chaude <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Rituel complet <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Lames neuves <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+      <span class="ticker-item">Sans attente <svg viewBox="0 0 24 24"><use href="#i-razor-blade"/></svg></span>
+    </div>
+  </div>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Nos services</span>
+        <h2>Six rituels, <em>un seul standard.</em></h2>
+        <p>Chaque prestation dure 45 minutes et inclut le même soin du détail : précision, propreté et une coupe qui vous ressemble.</p>
+      </div>
+      <div class="services-grid" id="servicesGrid">
+        <article class="svc rv" data-id="coupe">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-scissors"/></svg></div>
+          <h3 class="svc-name">Coupe Classique</h3>
+          <p class="svc-desc">Coupe, shampooing et finitions précises aux ciseaux et à la tondeuse. Le rendez-vous de base, exécuté avec exigence.</p>
+          <div class="svc-foot">
+            <span class="svc-dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span>
+            <span class="svc-price">25<small> TND</small></span>
+          </div>
+          <button class="btn btn-ghost-dark svc-book" data-preselect="coupe">Réserver ce service</button>
+        </article>
+        <article class="svc rv" data-id="coupe-barbe" style="--d:.06s">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-razor-blade"/></svg></div>
+          <h3 class="svc-name">Coupe + Barbe</h3>
+          <p class="svc-desc">Le duo signature : coupe complète et barbe sculptée à la lame, alignées pour un ensemble net et harmonieux.</p>
+          <div class="svc-foot">
+            <span class="svc-dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span>
+            <span class="svc-price">40<small> TND</small></span>
+          </div>
+          <button class="btn btn-ghost-dark svc-book" data-preselect="coupe-barbe">Réserver ce service</button>
+        </article>
+        <article class="svc rv" data-id="barbe" style="--d:.12s">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-towel"/></svg></div>
+          <h3 class="svc-name">Barbe Traditionnelle</h3>
+          <p class="svc-desc">Lame droite, serviette chaude, huile et soin. Le rituel qui redessine votre barbe avec précision et douceur.</p>
+          <div class="svc-foot">
+            <span class="svc-dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span>
+            <span class="svc-price">25<small> TND</small></span>
+          </div>
+          <button class="btn btn-ghost-dark svc-book" data-preselect="barbe">Réserver ce service</button>
+        </article>
+        <article class="svc rv" data-id="enfant" style="--d:.06s">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-spark"/></svg></div>
+          <h3 class="svc-name">Coupe Enfant</h3>
+          <p class="svc-desc">Pour nos plus jeunes clients jusqu'à 12 ans. Patience, douceur et un fauteuil qui leur va bien.</p>
+          <div class="svc-foot">
+            <span class="svc-dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span>
+            <span class="svc-price">20<small> TND</small></span>
+          </div>
+          <button class="btn btn-ghost-dark svc-book" data-preselect="enfant">Réserver ce service</button>
+        </article>
+        <article class="svc rv" data-id="rituel" style="--d:.12s">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-razor"/></svg></div>
+          <h3 class="svc-name">Rituel Complet</h3>
+          <p class="svc-desc">Coupe, barbe, soin du visage et massage relaxant. L'expérience Madjo dans son intégralité.</p>
+          <div class="svc-foot">
+            <span class="svc-dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span>
+            <span class="svc-price">60<small> TND</small></span>
+          </div>
+          <button class="btn btn-ghost-dark svc-book" data-preselect="rituel">Réserver ce service</button>
+        </article>
+        <article class="svc rv" data-id="fade" style="--d:.06s">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-fade"/></svg></div>
+          <h3 class="svc-name">Dégradé Skin Fade</h3>
+          <p class="svc-desc">Le dégradé fondu signature, de la nuque rasée au dessus fondu en douceur. Netteté maximale, contour parfait.</p>
+          <div class="svc-foot">
+            <span class="svc-dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span>
+            <span class="svc-price">30<small> TND</small></span>
+          </div>
+          <button class="btn btn-ghost-dark svc-book" data-preselect="fade">Réserver ce service</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= POURQUOI NOUS ================= -->
+  <section class="section" id="pourquoi">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow light">Pourquoi Madjo</span>
+        <h2>Un fauteuil, <em>des standards.</em></h2>
+        <p>Ce qui fait la différence ne se voit pas toujours — mais se ressent. Voici nos quatre engagements.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card rv">
+          <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-razor-blade"/></svg></div>
+          <h3>Lames neuves</h3>
+          <p>Une lame droite neuve et stérilisée pour chaque client. Zéro compromis sur l'hygiène.</p>
+        </div>
+        <div class="why-card rv" style="--d:.06s">
+          <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-towel"/></svg></div>
+          <h3>Serviette chaude</h3>
+          <p>Le rituel signature qui ouvre les pores et détend. Un moment qui change tout.</p>
+        </div>
+        <div class="why-card rv" style="--d:.12s">
+          <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-bolt"/></svg></div>
+          <h3>Sans attente</h3>
+          <p>Votre rendez-vous est réservé, votre fauteuil est prêt. Zéro temps perdu.</p>
+        </div>
+        <div class="why-card rv" style="--d:.18s">
+          <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-shield"/></svg></div>
+          <h3>Qualité garantie</h3>
+          <p>Un détail qui ne vous plaît pas ? Retouche offerte sous 48h. Simple et sans condition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BARBIERS ================= -->
+  <section class="section" id="barbiers">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Nos barbiers</span>
+        <h2>Trois paires de mains, <em>un même rituel.</em></h2>
+        <p>Choisissez votre barbier lors de la réservation — chacun apporte sa touche au même standard de qualité.</p>
+      </div>
+      <div class="barbers-grid">
+        <article class="barber-card owner rv">
+          <span class="owner-tag">Fondateur</span>
+          <div class="avatar">M</div>
+          <h3 class="bb-name">Madjo</h3>
+          <div class="bb-role">Maître barbier</div>
+          <p class="bb-spec">Spécialiste des coupes classiques et des transitions. L'art de la lame depuis plus de 12 ans.</p>
+          <span class="bb-rating"><span class="star">★★★★★</span> 4.9 <small>(128 avis)</small></span>
+        </article>
+        <article class="barber-card rv" style="--d:.08s">
+          <div class="avatar a2">Y</div>
+          <h3 class="bb-name">Yassine</h3>
+          <div class="bb-role">Expert coupes</div>
+          <p class="bb-spec">Coupes modernes, dégradés techniques et précision au millimètre. Votre style, son terrain de jeu.</p>
+          <span class="bb-rating"><span class="star">★★★★☆</span> 4.8 <small>(97 avis)</small></span>
+        </article>
+        <article class="barber-card rv" style="--d:.16s">
+          <div class="avatar a3">M</div>
+          <h3 class="bb-name">Mehdi</h3>
+          <div class="bb-role">Spécialiste barbe</div>
+          <p class="bb-spec">Barbes sculptées à la lame et rituel serviette chaude. Le roi de la ligne nette.</p>
+          <span class="bb-rating"><span class="star">★★★★★</span> 4.9 <small>(84 avis)</small></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RÉSERVATION ================= -->
+  <section class="section" id="reservation">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Réservation</span>
+        <h2>Votre fauteuil, <em>votre créneau.</em></h2>
+        <p>Quatre étapes, 30 secondes. Barbier, service, date et heure — les créneaux verts sont libres, les grisés sont pris.</p>
+      </div>
+
+      <div class="bk-wrap rv">
+        <!-- progress desktop -->
+        <div class="bk-progress" id="bkProgress">
+          <div class="bp-step active" data-step="1"><span class="bp-num">1</span><span class="bp-label">Barbier</span></div>
+          <div class="bp-link"></div>
+          <div class="bp-step" data-step="2"><span class="bp-num">2</span><span class="bp-label">Service</span></div>
+          <div class="bp-link"></div>
+          <div class="bp-step" data-step="3"><span class="bp-num">3</span><span class="bp-label">Date &amp; heure</span></div>
+          <div class="bp-link"></div>
+          <div class="bp-step" data-step="4"><span class="bp-num">4</span><span class="bp-label">Vos coordonnées</span></div>
+        </div>
+        <!-- progress mobile -->
+        <div class="bk-progress-compact">
+          <span class="pc-label" id="pcLabel">Barbier</span>
+          <span class="pc-line" id="pcLine"><i></i></span>
+          <span class="pc-count" id="pcCount">1<small>/4</small></span>
+        </div>
+
+        <div class="bk-layout">
+          <div class="bk-panel">
+            <!-- STEP 1 : barbier -->
+            <div class="bk-step active" id="step-barber" data-step="1">
+              <h2>Choisissez votre barbier</h2>
+              <p class="step-sub">Chaque barbier a son propre fauteuil et son agenda. Prenez le vôtre.</p>
+              <div class="barber-grid-bk">
+                <button class="select-card b-barber" data-barber="Madjo">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <span class="av-mini">M</span>
+                  <span class="n">Madjo</span>
+                  <span class="r">Maître barbier · Fondateur</span>
+                  <span class="s">Coupes classiques</span>
+                </button>
+                <button class="select-card b-barber" data-barber="Yassine">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <span class="av-mini b2">Y</span>
+                  <span class="n">Yassine</span>
+                  <span class="r">Expert coupes</span>
+                  <span class="s">Dégradés &amp; modernes</span>
+                </button>
+                <button class="select-card b-barber" data-barber="Mehdi">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <span class="av-mini b3">M</span>
+                  <span class="n">Mehdi</span>
+                  <span class="r">Spécialiste barbe</span>
+                  <span class="s">Barbe à la lame</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2 : service -->
+            <div class="bk-step" id="step-service" data-step="2">
+              <h2>Quel rituel aujourd'hui ?</h2>
+              <p class="step-sub">Toutes nos prestations durent 45 minutes — chaque créneau est pensé pour vous.</p>
+              <div class="select-grid">
+                <button class="select-card" data-svc="coupe">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <div class="s-top"><span class="s-name">Coupe Classique</span><span class="s-cat">Coupe</span></div>
+                  <div class="s-desc">Coupe, shampooing et finitions précises.</div>
+                  <div class="s-foot"><span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span><span class="p">25<small> TND</small></span></div>
+                </button>
+                <button class="select-card" data-svc="coupe-barbe">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <div class="s-top"><span class="s-name">Coupe + Barbe</span><span class="s-cat">Le duo</span></div>
+                  <div class="s-desc">Coupe complète et barbe sculptée.</div>
+                  <div class="s-foot"><span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span><span class="p">40<small> TND</small></span></div>
+                </button>
+                <button class="select-card" data-svc="barbe">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <div class="s-top"><span class="s-name">Barbe Traditionnelle</span><span class="s-cat">Rituel</span></div>
+                  <div class="s-desc">Lame droite, serviette chaude, huile et soin.</div>
+                  <div class="s-foot"><span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span><span class="p">25<small> TND</small></span></div>
+                </button>
+                <button class="select-card" data-svc="enfant">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <div class="s-top"><span class="s-name">Coupe Enfant</span><span class="s-cat">-12 ans</span></div>
+                  <div class="s-desc">Pour nos plus jeunes clients, avec douceur.</div>
+                  <div class="s-foot"><span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span><span class="p">20<small> TND</small></span></div>
+                </button>
+                <button class="select-card" data-svc="rituel">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <div class="s-top"><span class="s-name">Rituel Complet</span><span class="s-cat">Signature</span></div>
+                  <div class="s-desc">Coupe, barbe, soin du visage et massage.</div>
+                  <div class="s-foot"><span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span><span class="p">60<small> TND</small></span></div>
+                </button>
+                <button class="select-card" data-svc="fade">
+                  <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><use href="#i-check"/></svg></span>
+                  <div class="s-top"><span class="s-name">Dégradé Skin Fade</span><span class="s-cat">Tendance</span></div>
+                  <div class="s-desc">Fondu net de la nuque au sommet, contour parfait.</div>
+                  <div class="s-foot"><span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock2"/></svg> 45 min</span><span class="p">30<small> TND</small></span></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 3 : date & heure -->
+            <div class="bk-step" id="step-time" data-step="3">
+              <h2>Quand voulez-vous venir ?</h2>
+              <p class="step-sub">Disponible de 8h à 23h, du lundi au dimanche. Les créneaux en <strong style="color:var(--green-deep)">vert</strong> sont libres — les estompés sont déjà pris.</p>
+              <div class="date-scroll" id="dateStrip" aria-label="Choix du jour"></div>
+              <div class="time-block">
+                <div class="tb-title" id="timeBlockTitle">Heures disponibles</div>
+                <div class="time-grid" id="timeGrid"></div>
+                <div class="legend">
+                  <span><span class="sw on"></span> Disponible</span>
+                  <span><span class="sw off"></span> Déjà pris</span>
+                </div>
+                <p class="avail-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-clock"/></svg> <span id="availNote">Chaque coupe dure 45 minutes — la dernière commence à 22h15.</span></p>
+              </div>
+            </div>
+
+            <!-- STEP 4 : coordonnées -->
+            <div class="bk-step" id="step-info" data-step="4">
+              <h2>Encore deux secondes</h2>
+              <p class="step-sub">Vos coordonnées pour confirmer le rendez-vous. Vous recevrez votre référence.</p>
+              <form id="bookForm" novalidate>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="fName">Nom complet <span class="opt">*</span></label>
+                    <input type="text" id="fName" name="name" placeholder="Ahmed Ben Salah" autocomplete="name" required>
+                    <span class="err-msg">Veuillez indiquer votre nom.</span>
+                  </div>
+                  <div class="field">
+                    <label for="fPhone">Téléphone <span class="opt">*</span></label>
+                    <div class="phone-wrap">
+                      <span class="prefix">+216</span>
+                      <input type="tel" id="fPhone" name="phone" placeholder="20 123 456" autocomplete="tel" required>
+                    </div>
+                    <span class="err-msg">Un numéro tunisien à 8 chiffres.</span>
+                  </div>
+                  <div class="field">
+                    <label for="fEmail">Email <span class="opt">(facultatif)</span></label>
+                    <input type="email" id="fEmail" name="email" placeholder="vous@exemple.com" autocomplete="email" spellcheck="false">
+                    <span class="err-msg">Adresse email invalide.</span>
+                  </div>
+                  <div class="field full">
+                    <label for="fNotes">Note <span class="opt">(facultatif)</span></label>
+                    <textarea id="fNotes" name="notes" placeholder="Une préférence ? Une demande particulière ?"></textarea>
+                  </div>
+                </div>
+              </form>
+              <p class="submit-error" id="submitError" role="alert"></p>
+            </div>
+
+            <div class="step-nav">
+              <button class="btn-back" id="btnBack">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><use href="#i-chev-l"/></svg>
+                Retour
+              </button>
+              <button class="btn btn-amber btn-next" id="btnNext">
+                <span class="btn-label">Continuer</span>
+                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><use href="#i-chev-r"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- summary -->
+          <aside class="bk-summary" aria-live="polite">
+            <div class="summary-card">
+              <div class="summary-title">Votre réservation</div>
+              <div class="sum-rows">
+                <div class="sum-row"><div class="k">Barbier</div><div class="v" id="sumBarber"><span class="sum-empty">À choisir…</span></div></div>
+                <div class="sum-row"><div class="k">Service</div><div class="v" id="sumService"><span class="sum-empty">À choisir…</span></div></div>
+                <div class="sum-row"><div class="k">Date</div><div class="v" id="sumDate"><span class="sum-empty">À choisir…</span></div></div>
+                <div class="sum-row"><div class="k">Heure</div><div class="v" id="sumTime"><span class="sum-empty">À choisir…</span></div></div>
+              </div>
+              <div class="sum-divider"></div>
+              <div class="sum-total">
+                <span class="t-label">Total</span>
+                <span class="t-value" id="sumTotal">—<small> TND</small></span>
+              </div>
+            </div>
+            <p class="sum-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><use href="#i-shield"/></svg> Annulation ou changement gratuit jusqu'à 2h avant le rendez-vous.</p>
+          </aside>
+        </div>
+      </div>
+      <div class="bk-my rv">
+        <button class="btn btn-ghost-dark btn-my" id="openMyBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><use href="#i-cal"/></svg>
+          Mes réservations — voir ou annuler
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALERIE ================= -->
+  <section class="section" id="galerie">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Galerie</span>
+        <h2>L'atelier, <em>en images.</em></h2>
+        <p>Quelques regards sur le quotidien de Madjo — le fauteuil, le rituel, les finitions.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gal-card rv"><img src="media/gallery-1.jpg" alt="L'atelier de Madjo, fauteuil de barbier" loading="lazy"><figcaption class="gal-cap">L'atelier</figcaption></figure>
+        <figure class="gal-card rv" style="--d:.06s"><img src="media/gallery-2.jpg" alt="Le rituel de la serviette chaude" loading="lazy"><figcaption class="gal-cap">Le rituel</figcaption></figure>
+        <figure class="gal-card rv" style="--d:.12s"><img src="media/gallery-3.jpg" alt="Finitions précises à la lame" loading="lazy"><figcaption class="gal-cap">Les finitions</figcaption></figure>
+        <figure class="gal-card rv" style="--d:.18s"><img src="media/gallery-4.jpg" alt="L'ambiance du salon Madjo" loading="lazy"><figcaption class="gal-cap">L'ambiance</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AVIS ================= -->
+  <section class="section" id="avis">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Avis clients</span>
+        <h2>Ils ont quitté le fauteuil, <em>pas la boutique.</em></h2>
+      </div>
+      <div class="testi-grid">
+        <article class="testi-card rv">
+          <span class="q">”</span>
+          <div class="stars">★★★★★</div>
+          <blockquote>Le meilleur barbier de la région. La barbe à la lame avec la serviette chaude, c'est une expérience que je recommande à tous.</blockquote>
+          <div class="testi-foot"><span class="ta">K</span><div><div class="tn">Karim B.</div><div class="ts">La Marsa</div></div></div>
+        </article>
+        <article class="testi-card rv" style="--d:.08s">
+          <span class="q">”</span>
+          <div class="stars">★★★★★</div>
+          <blockquote>Propre, précis, à l'heure. La réservation en ligne m'a sauvé la vie un vendredi — j'étais sur place, fauteuil prêt.</blockquote>
+          <div class="testi-foot"><span class="ta">S</span><div><div class="tn">Sofien T.</div><div class="ts">Hammam Chott</div></div></div>
+        </article>
+        <article class="testi-card rv" style="--d:.16s">
+          <span class="q">”</span>
+          <div class="stars">★★★★☆</div>
+          <blockquote>J'ai essayé tous les salons de la côte. Chez Madjo, on ne ressort jamais déçu — la coupe tient, le style aussi.</blockquote>
+          <div class="testi-foot"><span class="ta">A</span><div><div class="tn">Anis M.</div><div class="ts">Tunis</div></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIDÉOS ================= -->
+  <section class="section" id="videos">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow light">Inspirations</span>
+        <h2>Des looks, <em>des idées.</em></h2>
+        <p>Nos inspirations du moment — appuyez sur play pour regarder. Parlez-nous de la vôtre au fauteuil.</p>
+      </div>
+      <div class="videos-grid">
+        <figure class="video-card rv">
+          <span class="video-tag">Style</span>
+          <video controls preload="metadata" playsinline poster="media/gallery-1.jpg">
+            <source src="media/video-1.mp4" type="video/mp4">
+          </video>
+        </figure>
+        <figure class="video-card rv" style="--d:.08s">
+          <span class="video-tag">Inspiration</span>
+          <video controls preload="metadata" playsinline poster="media/gallery-2.jpg">
+            <source src="media/video-2.mp4" type="video/mp4">
+          </video>
+        </figure>
+        <figure class="video-card rv" style="--d:.16s">
+          <span class="video-tag">Ambiance</span>
+          <video controls preload="metadata" playsinline poster="media/gallery-3.jpg">
+            <source src="media/video-3.mp4" type="video/mp4">
+          </video>
+        </figure>
+      </div>
+      <p class="videos-note rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-note"/></svg> Envie d'un de ces styles ? Mentionnez-le dans la note de votre réservation.</p>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT / HORAIRES / MAP ================= -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <span class="eyebrow">Contact &amp; horaires</span>
+        <h2>On vous attend, <em>au fauteuil.</em></h2>
+        <p>Ouverts tous les jours de 8h à 23h. Dernière coupe à 22h15.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card rv">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-clock2"/></svg> Horaires</h3>
+          <div class="hours" id="hoursList">
+            <div class="hr"><span>Lundi – Samedi</span><b>08:00 – 23:00</b></div>
+            <div class="hr"><span>Dimanche</span><b>08:00 – 23:00</b></div>
+            <div class="hr closed"><span>Dernière coupe</span><span>22:15</span></div>
+          </div>
+          <div class="c-item" style="border-top:1px dashed var(--line-soft);margin-top:22px;">
+            <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-pin"/></svg></div>
+            <div>
+              <div class="k">Adresse</div>
+              <div class="v">Hammam Chott, Ben Arous 2050<small>Tunis, Tunisie</small></div>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-phone"/></svg></div>
+            <div>
+              <div class="k">Téléphone</div>
+              <a class="v" href="tel:+21620000000">+216 20 000 000<small>Appel ou WhatsApp</small></a>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-inst"/></svg></div>
+            <div>
+              <div class="k">Instagram</div>
+              <a class="v" href="#" target="_blank" rel="noopener">@madjo.barber<small>Nos coupes du jour</small></a>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-mail"/></svg></div>
+            <div>
+              <div class="k">Email</div>
+              <a class="v" href="mailto:contact@madjo.tn">contact@madjo.tn<small>Réponse sous 24h</small></a>
+            </div>
+          </div>
+        </div>
+        <div class="map-card rv" style="--d:.08s">
+          <div class="map-frame">
+            <iframe title="Madjo — Hammam Chott, Tunis" src="https://www.google.com/maps?q=36.716985,10.370429&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+          <div class="map-head">
+            <div class="mf-t"><b>Madjo</b> · Hammam Chott, Ben Arous 2050</div>
+            <a class="btn btn-amber" href="https://maps.app.goo.gl/Zez1oysCoeVJBM9t6" target="_blank" rel="noopener">Itinéraire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= CONFIRMATION ================= -->
+<div class="conf-overlay" id="confOverlay" role="dialog" aria-modal="true" aria-labelledby="confTitle">
+  <div class="conf-card" id="confCard">
+    <div class="conf-razor">
+      <span class="sun"></span>
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <path class="blade" d="M14 78 Q22 28 72 20 L86 28 Q40 36 34 86 Z"/>
+        <path class="handle" d="M86 28 L104 10"/>
+        <circle class="tip" cx="104" cy="10" r="7"/>
+      </svg>
+      <span class="spark" style="--tx:46px;--ty:-52px;left:60%;top:12%"></span>
+      <span class="spark" style="--tx:-54px;--ty:-30px;left:78%;top:26%;animation-delay:.3s"></span>
+      <span class="spark" style="--tx:30px;--ty:52px;left:30%;top:8%;animation-delay:.6s"></span>
+      <span class="spark" style="--tx:-30px;--ty:46px;left:8%;top:46%;animation-delay:.9s"></span>
+    </div>
+    <span class="conf-eyebrow">Rendez-vous confirmé</span>
+    <h2 id="confTitle">À très vite, <em id="confName">l'ami</em> !</h2>
+    <p class="conf-sub">Votre fauteuil vous attend. Voici votre référence — présentez-la à votre barbier.</p>
+    <span class="conf-ref" id="confRef">MJO-XXXXXX</span>
+    <div class="conf-details">
+      <div class="conf-row"><div class="k">Barbier</div><div class="v"><b id="confBarber">—</b></div></div>
+      <div class="conf-row"><div class="k">Service</div><div class="v"><b id="confSvc">—</b><small id="confSvcMeta"></small></div></div>
+      <div class="conf-row"><div class="k">Quand</div><div class="v"><b id="confWhen">—</b><small id="confWhenMeta"></small></div></div>
+      <div class="conf-row"><div class="k">Total</div><div class="v"><b id="confPrice" style="font-family:var(--serif);font-size:20px;color:var(--terra)">—</b></div></div>
+    </div>
+    <div class="conf-note" id="confNote"></div>
+    <div class="conf-actions">
+      <button class="btn btn-amber" id="confClose">Parfait, merci !</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MES RÉSERVATIONS ================= -->
+<div class="conf-overlay" id="myOverlay" role="dialog" aria-modal="true" aria-labelledby="myTitle">
+  <div class="conf-card my-card">
+    <button class="my-x" id="myXBtn" type="button" aria-label="Fermer">×</button>
+    <div class="my-head">
+      <span class="my-head-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-cal"/></svg>
+      </span>
+      <h2 id="myTitle">Mes réservations</h2>
+      <p>Retrouvez vos rendez-vous à Madjo — et annulez-les si besoin.</p>
+    </div>
+    <div class="my-phone">
+      <div class="phone-wrap">
+        <span class="prefix">+216</span>
+        <input type="tel" id="myPhone" placeholder="20 123 456" autocomplete="tel" inputmode="numeric" aria-label="Numéro de téléphone tunisien">
+      </div>
+      <button class="btn btn-terra" id="mySearchBtn">Rechercher</button>
+    </div>
+    <div id="myMsg"></div>
+    <div class="my-list" id="myList"></div>
+    <div class="my-actions">
+      <button class="btn btn-ghost-dark" id="myCloseBtn">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#accueil">
+          <img class="brand-mark" src="media/logo-round.png" alt="" width="40" height="40">
+          <div class="brand-name">Madjo<small>Barbier · Hammam Chott</small></div>
+        </a>
+        <p>Un fauteuil, une lame droite, un rituel. Depuis 2014, l'adresse qui respecte votre temps et votre style.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#barbiers">Barbiers</a></li>
+          <li><a href="#reservation">Réservation</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#avis">Avis</a></li>
+          <li><a href="dashboard.html">Tableau de bord</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Horaires</h4>
+        <ul>
+          <li>Lundi – Dimanche</li>
+          <li>08:00 – 23:00</li>
+          <li><a href="#contact">Hammam Chott 2050, Tunis</a></li>
+          <li><a href="tel:+21620000000">+216 20 000 000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Madjo — Barbier. Tous droits réservés.</span>
+      <span>Fait avec soin, à Tunis <svg class="foot-razor" viewBox="0 0 24 24" width="14" height="14"><use href="#i-razor-blade"/></svg></span>
+    </div>
+  </div>
+</footer>
+
+<!-- mobile sticky booking bar -->
+<div class="mobile-bar" id="mobileBar">
+  <div class="mb-info">
+    <span class="mb-total" id="mbTotal">—<small style="font-size:13px;font-family:var(--sans);font-weight:800"> TND</small></span>
+    <span class="mb-dur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><use href="#i-clock2"/></svg> 45 min</span>
+  </div>
+  <button class="btn btn-amber mb-cta" id="mbNext"><span class="btn-label">Continuer</span></button>
+</div>
+
+<script>
+/* ============================================================
+   CONFIG — collez ici l'URL de votre Web App Google Apps Script.
+   Exemple :
+   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/XXXXX/exec';
+   ============================================================ */
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXo-pr5mpw6w7vClL50vvgt_6B47cd3ZuDK7-4GWKECTtW8AWWJyQJgCeVgvaU0bWW/exec';
+
+/* ---------- données ---------- */
+const BARBERS = {
+  'Madjo':  { role: 'Maître barbier', spec: 'Coupes classiques' },
+  'Yassine':{ role: 'Expert coupes',   spec: 'Dégradés & modernes' },
+  'Mehdi':  { role: 'Spécialiste barbe', spec: 'Barbe à la lame' }
+};
+const SERVICES = {
+  'coupe':      { name: 'Coupe Classique',    price: 25, tag: 'Coupe' },
+  'coupe-barbe':{ name: 'Coupe + Barbe',      price: 40, tag: 'Le duo' },
+  'barbe':      { name: 'Barbe Traditionnelle', price: 25, tag: 'Rituel' },
+  'enfant':     { name: 'Coupe Enfant',       price: 20, tag: '-12 ans' },
+  'rituel':     { name: 'Rituel Complet',     price: 60, tag: 'Signature' },
+  'fade':       { name: 'Dégradé Skin Fade',  price: 30, tag: 'Tendance' }
+};
+const DURATION = 45;
+const SLOT_START = 8 * 60;          // 08:00
+const SLOT_END   = 22 * 60 + 15;    // dernier départ 22:15
+const SLOT_STEP  = 45;
+const DAYS_AHEAD = 14;
+const LS_KEY = 'madjo_bookings_v1';
+const AVAIL_CACHE = {};
+
+const state = { step: 1, barber: null, service: null, date: null, time: null };
+
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ---------- utilitaires ---------- */
+const pad = n => String(n).padStart(2, '0');
+const toHM = m => pad(Math.floor(m / 60)) + ':' + pad(m % 60);
+const fmtKey = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+const parseKey = k => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); };
+const weekDays = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const months = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+
+function fmtLong(k) {
+  const d = parseKey(k);
+  return weekDays[d.getDay()] + ' ' + d.getDate() + ' ' + months[d.getMonth()];
+}
+function fmtShort(k) {
+  const d = parseKey(k);
+  return pad(d.getDate()) + '/' + pad(d.getMonth() + 1);
+}
+
+function nextDays(n) {
+  const out = [];
+  const t = new Date(); t.setHours(0, 0, 0, 0);
+  for (let i = 0; i < n; i++) {
+    const d = new Date(t); d.setDate(t.getDate() + i);
+    out.push(d);
+  }
+  return out;
+}
+
+/* ---------- stockage local des réservations ---------- */
+function getLocal() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); }
+  catch (e) { return []; }
+}
+function saveLocal(booking) {
+  const arr = getLocal(); arr.push(booking);
+  try { localStorage.setItem(LS_KEY, JSON.stringify(arr)); } catch (e) {}
+}
+
+/* ---------- disponibilité (Sheet + local) ---------- */
+function getBookedFor(barber, dateKey) {
+  const local = getLocal().filter(b => b.barber === barber && b.date === dateKey).map(b => b.time);
+  const remote = (AVAIL_CACHE[barber] || {})[dateKey] || [];
+  return new Set([...local, ...remote]);
+}
+
+function fetchAvailability(barber, force) {
+  if (!GOOGLE_SCRIPT_URL) return Promise.resolve();
+  if (!force && AVAIL_CACHE[barber]) return Promise.resolve();
+  return fetch(GOOGLE_SCRIPT_URL + '?action=avail&barber=' + encodeURIComponent(barber))
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(json => {
+      if (json && json.ok && json.bookings) AVAIL_CACHE[barber] = json.bookings;
+      else AVAIL_CACHE[barber] = {};
+    })
+    .catch(() => { AVAIL_CACHE[barber] = {}; });
+}
+
+/* ---------- génération des créneaux ---------- */
+function slotsOfDay() {
+  const arr = [];
+  for (let m = SLOT_START; m <= SLOT_END; m += SLOT_STEP) arr.push(m);
+  return arr;
+}
+
+/* ---------- rendu : étapes / progression ---------- */
+function goTo(step, noScroll) {
+  state.step = step;
+  $$('.bk-step').forEach(el => el.classList.toggle('active', +el.dataset.step === step));
+  $$('.bp-step').forEach(el => {
+    const n = +el.dataset.step;
+    el.classList.toggle('done', n < step);
+    el.classList.toggle('active', n === step);
+  });
+  const labels = ['Barbier', 'Service', 'Date & heure', 'Coordonnées'];
+  $('#pcLabel').textContent = labels[step - 1];
+  $('#pcLabel').style.opacity = 1;
+  $('#pcCount').innerHTML = step + '<small>/4</small>';
+  $('#pcLine').querySelector('i').style.transform = 'scaleX(' + ((step - 1) / 3) + ')';
+  $('#btnBack').style.visibility = step > 1 ? 'visible' : 'hidden';
+  updateNextBtn();
+  if (step === 3) {
+    renderDates();
+    if (state.barber) fetchAvailability(state.barber, true).then(renderDates);
+  }
+  if (!noScroll) {
+    const mob = window.matchMedia('(max-width:860px)').matches;
+    const target = mob ? document.querySelector('.bk-step.active') : $('#bkProgress');
+    if (target) target.scrollIntoView({ block: mob ? 'start' : 'nearest', behavior: 'smooth' });
+  }
+}
+
+function updateNextBtn() {
+  let disabled = false, label = 'Continuer';
+  if (state.step === 1) disabled = !state.barber;
+  if (state.step === 2) disabled = !(state.barber && state.service);
+  if (state.step === 3) disabled = !(state.date && state.time);
+  if (state.step === 4) { disabled = false; label = 'Confirmer ma réservation'; }
+  $('#btnNext').disabled = disabled;
+  $('#btnNext .btn-label').textContent = label;
+  $('#mbNext').disabled = disabled;
+  $('#mbNext .btn-label').textContent = label;
+}
+
+/* ---------- sélection barbier / service ---------- */
+function bindSelectCards() {
+  $$('#step-barber .select-card').forEach(card => {
+    card.addEventListener('click', () => {
+      $$('#step-barber .select-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.barber = card.dataset.barber;
+      state.date = null; state.time = null;
+      renderSummary();
+      fetchAvailability(state.barber).then(renderDates);
+      updateNextBtn();
+    });
+  });
+  $$('#step-service .select-card').forEach(card => {
+    card.addEventListener('click', () => {
+      $$('#step-service .select-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.service = card.dataset.svc;
+      renderSummary();
+      updateNextBtn();
+    });
+  });
+}
+
+/* ---------- dates ---------- */
+function renderDates() {
+  const strip = $('#dateStrip');
+  const days = nextDays(DAYS_AHEAD);
+  strip.innerHTML = '';
+  days.forEach(d => {
+    const key = fmtKey(d);
+    const today = new Date(); today.setHours(0,0,0,0);
+    const isToday = key === fmtKey(today);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'date-card' + (state.date === key ? ' selected' : '');
+    btn.dataset.key = key;
+    btn.setAttribute('aria-pressed', state.date === key);
+    btn.innerHTML =
+      '<div class="d-top">' + (isToday ? 'Auj.' : weekDays[d.getDay()].slice(0, 3)) + '</div>' +
+      '<div class="d-day">' + d.getDate() + '</div>' +
+      '<div class="d-month">' + months[d.getMonth()].toUpperCase() + '</div>';
+    btn.addEventListener('click', () => {
+      $$('.date-card').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', 'true');
+      state.date = key;
+      state.time = null;
+      renderTimes();
+      renderSummary();
+      updateNextBtn();
+    });
+    strip.appendChild(btn);
+  });
+  if (!state.date) { strip.scrollLeft = 0; }
+  renderTimes();
+}
+
+function renderTimes() {
+  const grid = $('#timeGrid');
+  grid.innerHTML = '';
+  if (!state.date) { $('#timeBlockTitle').textContent = 'Choisissez d\'abord un jour'; return; }
+  $('#timeBlockTitle').textContent = 'Heures disponibles — ' + fmtLong(state.date);
+  const booked = getBookedFor(state.barber, state.date);
+  const now = new Date();
+  const todayKey = fmtKey(now);
+  const slots = slotsOfDay();
+  slots.forEach(mins => {
+    const hm = toHM(mins);
+    const isPast = state.date === todayKey && (mins <= now.getHours() * 60 + now.getMinutes());
+    const taken = booked.has(hm) || isPast;
+    const sel = state.time === hm;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'time-slot ' + (taken ? 'unavailable' : 'available') + (sel ? ' selected' : '');
+    btn.textContent = hm;
+    btn.disabled = taken;
+    btn.setAttribute('aria-pressed', sel);
+    btn.addEventListener('click', () => {
+      $$('.time-slot').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', 'true');
+      state.time = hm;
+      renderSummary();
+      updateNextBtn();
+    });
+    grid.appendChild(btn);
+  });
+  if (!grid.querySelector('.time-slot:not(.unavailable)')) {
+    grid.insertAdjacentHTML('beforeend',
+      '<p class="time-empty">Aucun créneau libre ce jour — choisissez un autre jour.</p>');
+  }
+}
+
+/* ---------- résumé ---------- */
+function renderSummary() {
+  const svc = SERVICES[state.service];
+  $('#sumBarber').innerHTML = state.barber
+    ? state.barber + '<small>' + (BARBERS[state.barber] || {}).role + '</small>'
+    : '<span class="sum-empty">À choisir…</span>';
+  $('#sumService').innerHTML = svc
+    ? svc.name + '<small>45 min</small>'
+    : '<span class="sum-empty">À choisir…</span>';
+  $('#sumDate').innerHTML = state.date
+    ? fmtLong(state.date)
+    : '<span class="sum-empty">À choisir…</span>';
+  $('#sumTime').innerHTML = state.time
+    ? state.time
+    : '<span class="sum-empty">À choisir…</span>';
+  $('#sumTotal').innerHTML = svc ? svc.price + '<small> TND</small>' : '—<small> TND</small>';
+  $('#mbTotal').innerHTML = svc ? svc.price + '<small style="font-size:13px;font-family:var(--sans);font-weight:800"> TND</small>' : '—<small style="font-size:13px;font-family:var(--sans);font-weight:800"> TND</small>';
+}
+
+/* ---------- envoi / confirmation ---------- */
+function genRef() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let s = '';
+  for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
+  return 'MJO-' + s;
+}
+
+let submitting = false;
+
+async function confirmBooking() {
+  if (submitting) return;
+  const errBox = $('#submitError');
+  errBox.classList.remove('show');
+  const name = $('#fName').value.trim();
+  const phone = '+216' + $('#fPhone').value.trim().replace(/\D/g, '');
+  const svc = SERVICES[state.service];
+  const ref = genRef();
+  const booking = {
+    ref, barber: state.barber, service: svc.name, durationMin: DURATION,
+    price: svc.price, date: state.date, time: state.time,
+    name, phone, email: $('#fEmail').value.trim(), notes: $('#fNotes').value.trim()
+  };
+
+  if (!GOOGLE_SCRIPT_URL) {
+    saveLocal(booking);
+    showConf(booking);
+    return;
+  }
+
+  submitting = true;
+  $('#btnNext').disabled = true;
+  $('#mbNext').disabled = true;
+  $('#btnNext .btn-label').textContent = 'Envoi…';
+  $('#mbNext .btn-label').textContent = 'Envoi…';
+
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(booking)
+    });
+    const json = await res.json();
+    if (json && json.ok) {
+      saveLocal(booking);
+      showConf(booking);
+    } else {
+      failSubmit(json && json.error === 'slot_taken'
+        ? 'Ce créneau vient d\'être pris par un autre client. Choisissez une autre heure.'
+        : 'La réservation n\'a pas pu être enregistrée. Réessayez, ou choisissez une autre heure.');
+    }
+  } catch (err) {
+    saveLocal(booking);
+    showConf(booking, true);
+  }
+}
+
+function failSubmit(msg) {
+  submitting = false;
+  $('#btnNext').disabled = false;
+  $('#mbNext').disabled = false;
+  updateNextBtn();
+  const errBox = $('#submitError');
+  errBox.textContent = msg;
+  errBox.classList.add('show');
+  errBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function showConf(booking, offline) {
+  const svc = SERVICES[state.service];
+  const first = booking.name.split(' ')[0];
+  $('#confName').textContent = first;
+  $('#confRef').textContent = booking.ref;
+  $('#confBarber').textContent = booking.barber;
+  $('#confSvc').textContent = svc.name;
+  $('#confSvcMeta').textContent = booking.durationMin + ' min · ' + booking.price + ' TND';
+  $('#confWhen').textContent = fmtLong(booking.date) + ' à ' + booking.time;
+  $('#confWhenMeta').textContent = 'Le rendez-vous dure 45 minutes';
+  $('#confPrice').textContent = booking.price + ' TND';
+  const note = $('#confNote');
+  if (offline) {
+    note.classList.add('show');
+    note.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#i-bolt"/></svg>Confirmé sur cet appareil, mais la sauvegarde en ligne a échoué. Contactez le salon au <b>+216 20 000 000</b> pour confirmer.';
+  } else if (GOOGLE_SCRIPT_URL) {
+    note.classList.remove('show');
+    note.innerHTML = '';
+  } else {
+    note.classList.add('show');
+    note.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#i-bolt"/></svg>Mode démo : la réservation est enregistrée sur cet appareil. Connectez Google Sheets (voir fichier <b>google-sheet-backend.gs</b>) pour une sauvegarde en ligne partagée.';
+  }
+  openConf();
+}
+
+/* ---------- ouverture / fermeture de la confirmation ---------- */
+let lastFocus = null;
+function openConf() {
+  lastFocus = document.activeElement;
+  $('#confOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  $('#confClose').focus();
+}
+function closeConf() {
+  $('#confOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  reset();
+  if (lastFocus) lastFocus.focus();
+}
+
+/* ================= MES RÉSERVATIONS ================= */
+const myEl = () => $('#myList');
+let lastBookings = [], lastPhone = '';
+
+function openMy() {
+  lastFocus = document.activeElement;
+  $('#myOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  $('#myMsg').innerHTML = '';
+  $('#myList').innerHTML = '';
+  const fine = window.matchMedia('(pointer:fine)').matches || window.innerWidth > 860;
+  setTimeout(() => { if (fine) $('#myPhone').focus(); }, 60);
+}
+function closeMy() {
+  $('#myOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
+}
+function myClear() { $('#myMsg').innerHTML = ''; }
+function myErr(msg) { $('#myMsg').innerHTML = '<p class="my-err" role="alert">' + msg + '</p>'; }
+function myNote(msg) { $('#myMsg').innerHTML = '<p class="my-note" role="status">' + msg + '</p>'; }
+
+function myPhoneKey() {
+  let d = $('#myPhone').value.trim().replace(/\D/g, '');
+  if (d.slice(0, 3) === '216') d = d.slice(3);
+  return d;
+}
+
+async function myLookup() {
+  const digits = myPhoneKey();
+  if (digits.length < 8) { myErr('Entrez un numéro tunisien à 8 chiffres.'); return; }
+  const phone = '+216' + digits;
+  myClear();
+  myEl().innerHTML = '<p class="my-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#i-cal"/></svg>Recherche…</p>';
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL + '?action=lookup&phone=' + encodeURIComponent(digits));
+    const json = await res.json();
+    if (json && json.ok && Array.isArray(json.bookings)) renderMy(json.bookings, phone);
+    else myErr('Service temporairement indisponible — réessayez dans un instant.');
+  } catch (e) {
+    myErr('Impossible de joindre le serveur. Vérifiez votre connexion.');
+  }
+}
+
+function myCardHTML(b) {
+  const today = fmtKey(new Date());
+  const cancelled = b.status === 'cancelled';
+  const past = b.date < today;
+  const dt = new Date(b.date);
+  return '<div class="my-bk' + (cancelled ? ' cancelled' : '') + '" data-ref="' + b.ref + '">' +
+    '<div class="my-chip' + ((cancelled || past) ? ' past' : '') + '">' +
+      '<span class="c-day">' + dt.getDate() + '</span>' +
+      '<span class="c-mon">' + months[dt.getMonth()].slice(0, 3).toUpperCase() + '</span>' +
+    '</div>' +
+    '<div class="my-bk-inf">' +
+      '<div class="my-bk-svc">' + b.service + '</div>' +
+      '<div class="my-bk-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#i-clock2"/></svg>' + b.barber + ' · à ' + b.time + '</div>' +
+      '<div class="my-bk-ref">' + b.ref + ' · ' + b.price + ' TND' + (past ? ' · passé' : '') + '</div>' +
+    '</div>' +
+    '<div class="my-bk-side">' +
+      '<span class="my-tag ' + (cancelled ? 'off' : 'on') + '">' + (cancelled ? 'Annulé' : (past ? 'Passé' : 'Confirmé')) + '</span>' +
+      ((cancelled || past) ? '' : '<button class="btn my-cancel" type="button" data-ref="' + b.ref + '">Annuler</button>') +
+    '</div>' +
+  '</div>';
+}
+
+function renderMy(bookings, phone) {
+  myClear();
+  lastBookings = bookings; lastPhone = phone;
+  if (!bookings.length) {
+    myEl().innerHTML = '<p class="my-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#i-cal"/></svg>Aucune réservation trouvée pour ce numéro.</p>';
+    return;
+  }
+  const list = bookings.slice().sort((a, b) => (b.date + ' ' + b.time).localeCompare(a.date + ' ' + a.time));
+  myEl().innerHTML = list.map(b => myCardHTML(b)).join('');
+  myEl().querySelectorAll('.my-cancel').forEach(b => {
+    const bk = lastBookings.find(x => x.ref === b.dataset.ref);
+    b.addEventListener('click', () => askCancel(b.dataset.ref, phone, b.closest('.my-bk-side'), bk));
+  });
+}
+
+function askCancel(ref, phone, side, bk) {
+  side.innerHTML =
+    '<div class="my-cf">' +
+      '<span class="my-cf-txt">Annuler ' + ref + ' ?</span>' +
+      '<button type="button" class="btn my-cancel" data-ok="1">Confirmer</button>' +
+      '<button type="button" class="btn btn-ghost-dark" data-no="1">Retour</button>' +
+    '</div>';
+  side.querySelector('[data-ok]').addEventListener('click', () => doCancel(ref, phone, side, bk));
+  side.querySelector('[data-no]').addEventListener('click', () => renderMy(lastBookings, lastPhone));
+}
+
+async function doCancel(ref, phone, side, bk) {
+  const ok = side.querySelector('[data-ok]'), no = side.querySelector('[data-no]');
+  ok.disabled = true; no.disabled = true;
+  ok.textContent = 'Annulation…';
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'cancel', ref, phone })
+    });
+    const json = await res.json();
+    if (json && json.ok) {
+      removeLocal(ref);
+      side.closest('.my-bk').outerHTML = myCardHTML(Object.assign({}, bk, { status: 'cancelled' }));
+      myNote('Rendez-vous ' + ref + ' annulé. Votre créneau est libéré — à bientôt !');
+    } else {
+      ok.disabled = false; no.disabled = false; ok.textContent = 'Confirmer';
+      myErr(json && json.error === 'already_cancelled'
+        ? 'Ce rendez-vous était déjà annulé.'
+        : json && json.error === 'not_found'
+          ? 'Ce rendez-vous n\'existe plus sur le serveur.'
+          : 'Annulation impossible, réessayez dans un instant.');
+    }
+  } catch (e) {
+    ok.disabled = false; no.disabled = false; ok.textContent = 'Confirmer';
+    myErr('Impossible de joindre le serveur pour annuler.');
+  }
+}
+
+function removeLocal(ref) {
+  const arr = getLocal().filter(b => b.ref !== ref);
+  try { localStorage.setItem(LS_KEY, JSON.stringify(arr)); } catch (e) {}
+}
+
+/* ---------- validation ---------- */
+function validate() {
+  let ok = true;
+  const name = $('#fName'), phone = $('#fPhone'), email = $('#fEmail');
+  const f1 = name.parentElement, f2 = phone.parentElement.parentElement, f3 = email.parentElement;
+  const clear = el => el.classList.remove('error');
+  const mark = el => el.classList.add('error');
+  const bad = [];
+
+  clear(f1); clear(f2); clear(f3);
+  if (!name.value.trim()) { mark(f1); bad.push(name); ok = false; }
+  const digits = phone.value.trim().replace(/\D/g, '');
+  if (digits.length < 8) { mark(f2); bad.push(phone); ok = false; }
+  if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) { mark(f3); bad.push(email); ok = false; }
+  if (bad.length) {
+    const first = bad[0];
+    first.focus({ preventScroll: true });
+    first.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+  return ok;
+}
+
+/* ---------- navigation ---------- */
+function next() {
+  if (state.step === 4) {
+    if (validate()) confirmBooking();
+    return;
+  }
+  goTo(state.step + 1);
+}
+function back() {
+  if (state.step > 1) goTo(state.step - 1);
+}
+
+/* ---------- init ---------- */
+function init() {
+  $('#year').textContent = new Date().getFullYear();
+  const heroV = document.querySelector('.hero-video');
+  if (heroV && heroV.play) { const p = heroV.play(); if (p && p.catch) p.catch(() => {}); }
+  const todayRow = $$('#hoursList .hr')[(new Date().getDay() === 0) ? 1 : 0];
+  if (todayRow) todayRow.classList.add('today');
+  bindSelectCards();
+  renderDates();
+  renderSummary();
+
+  $('#btnNext').addEventListener('click', next);
+  $('#mbNext').addEventListener('click', next);
+  $('#btnBack').addEventListener('click', back);
+  $('#confClose').addEventListener('click', closeConf);
+  $('#confOverlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeConf();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if ($('#confOverlay').classList.contains('open')) closeConf();
+    else if ($('#myOverlay').classList.contains('open')) closeMy();
+  });
+  $('#confOverlay').addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const f = $('#confOverlay').querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* mes réservations */
+  $('#openMyBtn').addEventListener('click', openMy);
+  $('#myCloseBtn').addEventListener('click', closeMy);
+  $('#myXBtn').addEventListener('click', closeMy);
+  $('#mySearchBtn').addEventListener('click', myLookup);
+  $('#myPhone').addEventListener('keydown', e => { if (e.key === 'Enter') myLookup(); });
+  $('#myOverlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeMy();
+  });
+  $('#myOverlay').addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const f = $('#myOverlay').querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  $$('.svc-book').forEach(b => {
+    b.addEventListener('click', () => {
+      const presvc = b.dataset.preselect;
+      if (presvc) {
+        $$('#step-service .select-card').forEach(c => {
+          c.classList.toggle('selected', c.dataset.svc === presvc);
+        });
+        state.service = presvc;
+      }
+      goTo(1);
+    });
+  });
+
+  /* header scroll */
+  const header = $('#siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* nav mobile */
+  const navToggle = $('#navToggle');
+  navToggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', open);
+    navToggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+  });
+  $$('.main-nav a').forEach(a => a.addEventListener('click', () => {
+    document.body.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* reveal on scroll */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+  $$('.rv').forEach(el => io.observe(el));
+
+  goTo(1, true);
+}
+function reset() {
+  state.barber = null; state.service = null; state.date = null; state.time = null;
+  submitting = false;
+  $$('.select-card').forEach(c => c.classList.remove('selected'));
+  $$('.time-slot').forEach(b => { b.classList.remove('selected'); b.disabled = true; });
+  $('#fName').value = ''; $('#fPhone').value = ''; $('#fEmail').value = ''; $('#fNotes').value = '';
+  $$('.field').forEach(f => f.classList.remove('error'));
+  $('#submitError').classList.remove('show');
+  goTo(1);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

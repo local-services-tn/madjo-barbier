@@ -1,0 +1,6 @@
+.agents/
+skills-lock.json
+--viewport
+.DS_Store
+Thumbs.db
+*.log

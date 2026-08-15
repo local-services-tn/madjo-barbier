@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau de bord — Madjo</title>
+<meta name="description" content="Tableau de bord de la boutique Madjo — réservations, revenus et statistiques.">
+<link rel="icon" type="image/png" href="media/favicon-128.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,100;1,9..144,300..700,100&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   MADJO — Tableau de bord
+   Palette & langage visuel identiques au site
+   ============================================================ */
+:root{
+  --espresso:#231611;
+  --espresso-2:#2E1D15;
+  --ink:#241A14;
+  --cream:#F8F1E3;
+  --cream-2:#FDF8EE;
+  --sand:#EBDFC7;
+  --sand-2:#E2D3B6;
+  --terra:#BC5B3A;
+  --terra-deep:#9E4528;
+  --amber:#E2A63E;
+  --amber-bright:#F0B85B;
+  --amber-soft:rgba(226,166,62,.16);
+  --olive:#6F6A44;
+  --olive-deep:#56522F;
+  --olive-soft:rgba(111,106,68,.16);
+  --green:#4E7A4B;
+  --green-deep:#3A5F38;
+  --green-soft:rgba(78,122,75,.18);
+  --line:rgba(36,26,20,.14);
+  --line-soft:rgba(36,26,20,.08);
+  --mut:rgba(36,26,20,.66);
+  --faint:rgba(36,26,20,.56);
+  --on-dark:rgba(248,241,227,.82);
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --r:20px;
+  --r-lg:26px;
+  --shadow:0 1px 0 rgba(36,26,20,.04),0 22px 44px -30px rgba(36,26,20,.4);
+  --pattern:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%23241A14' stroke-width='1'%3E%3Cpath d='M0 80 L80 0 L160 80 L80 160 Z'/%3E%3Cpath d='M23.43 23.43 L136.57 23.43 L136.57 136.57 L23.43 136.57 Z'/%3E%3Cpath d='M23.43 23.43 L-23.43 23.43 L-23.43 -23.43 L23.43 -23.43 Z'/%3E%3Cpath d='M33.14 0 L0 33.14 L-33.14 0 L0 -33.14 Z'/%3E%3Ccircle cx='80' cy='80' r='2.2' fill='%23241A14'/%3E%3Ccircle cx='0' cy='0' r='1.6' fill='%23241A14'/%3E%3C/g%3E%3C/svg%3E");
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:var(--sans);
+  background:var(--cream);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.62;
+  font-size:16px;
+}
+a{text-decoration:none;color:inherit;}
+.wrap{max-width:1220px;margin:0 auto;padding:0 22px;}
+
+/* ---------- header ---------- */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(248,241,227,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;}
+.brand{display:flex;align-items:center;gap:11px;}
+.brand-mark{width:40px;height:40px;flex:none;border-radius:50%;box-shadow:0 6px 14px -8px rgba(36,26,20,.5);}
+.brand-name{font-family:var(--serif);font-variation-settings:'SOFT' 100;font-size:24px;font-weight:600;line-height:1;letter-spacing:.01em;}
+.brand-name small{display:block;font-family:var(--sans);font-size:8.5px;font-weight:800;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);margin-top:5px;}
+.header-actions{display:flex;align-items:center;gap:10px;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:14px;border:0;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;color:var(--ink);}
+.btn:hover{transform:translateY(-1px);}
+.btn-amber{background:var(--amber);color:#241A14;}
+.btn-amber:hover{background:var(--amber-bright);box-shadow:0 10px 22px -14px rgba(226,166,62,.8);}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);}
+.btn-ghost:hover{border-color:var(--terra);color:var(--terra);}
+.btn-terra{background:var(--terra);color:var(--cream);}
+.btn-terra:hover{background:var(--terra-deep);box-shadow:0 10px 22px -14px rgba(188,91,58,.9);}
+
+/* ---------- hero band ---------- */
+.band{position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft);}
+.band::before{content:"";position:absolute;inset:0;background-image:var(--pattern);background-size:170px 170px;opacity:.05;pointer-events:none;}
+.band-inner{position:relative;padding:52px 0 44px;text-align:center;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:.34em;text-transform:uppercase;color:var(--terra);}
+.eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:var(--amber);opacity:.6;}
+.band h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.08;margin:12px 0 6px;letter-spacing:-.01em;}
+.band h1 em{font-style:italic;color:var(--terra);}
+.band p{color:var(--mut);max-width:560px;margin:0 auto;}
+.live{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:12.5px;font-weight:700;color:var(--green-deep);background:var(--green-soft);border:1px solid rgba(78,122,75,.28);padding:7px 14px;border-radius:999px;}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+/* ---------- KPIs ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px;}
+.kpi{position:relative;overflow:hidden;background:var(--cream-2);border:1px solid var(--line-soft);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:22px;}
+.kpi::after{content:"";position:absolute;right:-30px;bottom:-30px;width:90px;height:90px;border-radius:50%;background:var(--amber-soft);opacity:.7;}
+.kpi-label{font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);}
+.kpi-value{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.2vw,34px);line-height:1.1;margin-top:8px;}
+.kpi-value small{font-size:.55em;font-family:var(--sans);font-weight:700;color:var(--mut);}
+.kpi-sub{font-size:12.5px;color:var(--faint);margin-top:6px;}
+
+/* ---------- grids ---------- */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;}
+.card{background:var(--cream-2);border:1px solid var(--line-soft);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:22px;}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+.card-title{font-family:var(--serif);font-weight:600;font-size:19px;}
+.card-title small{display:block;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);}
+.chart-box{position:relative;height:270px;}
+.chart-box.tall{height:330px;}
+
+/* period pills */
+.pills{display:inline-flex;background:var(--sand);border-radius:12px;padding:3px;gap:2px;}
+.pills button{border:0;background:transparent;font-family:var(--sans);font-size:12.5px;font-weight:700;color:var(--mut);padding:7px 14px;border-radius:9px;cursor:pointer;transition:all .15s;}
+.pills button.active{background:var(--cream-2);color:var(--ink);box-shadow:0 2px 8px -4px rgba(36,26,20,.4);}
+
+/* ---------- table ---------- */
+.filters{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.search{flex:1;min-width:180px;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 14px;color:var(--faint);}
+.search svg{flex:none;}
+.search input{border:0;outline:0;background:transparent;font-family:var(--sans);font-size:14px;width:100%;color:var(--ink);}
+select{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 34px 10px 14px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23241A14' stroke-width='2.2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px;}
+.table-wrap{overflow-x:auto;border:1px solid var(--line-soft);border-radius:16px;background:#fff;margin-top:14px;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:820px;}
+thead th{position:sticky;top:0;background:var(--sand);color:var(--ink);text-align:left;font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap;}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--line-soft);white-space:nowrap;}
+tbody tr:last-child td{border-bottom:0;}
+tbody tr:hover{background:rgba(226,166,62,.08);}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;}
+.pill-terra{background:var(--amber-soft);color:var(--terra-deep);}
+.pill-olive{background:var(--olive-soft);color:var(--olive-deep);}
+.pill-green{background:var(--green-soft);color:var(--green-deep);}
+.pill-cancelled{background:var(--sand-2);color:var(--mut);text-decoration:line-through;}
+.row-cancelled{opacity:.6;}
+.row-cancelled .pill-cancelled{opacity:1;}
+.price{font-weight:800;color:var(--terra-deep);}
+.mono{font-family:var(--sans);color:var(--faint);font-size:12px;}
+.empty{padding:40px;text-align:center;color:var(--faint);font-size:14px;}
+
+/* ---------- gate ---------- */
+#gate{position:fixed;inset:0;z-index:100;background:var(--cream);display:flex;align-items:center;justify-content:center;padding:22px;}
+#gate::before{content:"";position:absolute;inset:0;background-image:var(--pattern);background-size:170px 170px;opacity:.05;pointer-events:none;}
+.gate-card{position:relative;width:100%;max-width:400px;background:var(--cream-2);border:1px solid var(--line-soft);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:36px 32px;text-align:center;}
+.gate-card .brand-mark{width:56px;height:56px;margin-bottom:14px;}
+.gate-card h2{font-family:var(--serif);font-weight:600;font-size:24px;}
+.gate-card p{color:var(--mut);font-size:13.5px;margin:8px 0 20px;}
+.gate-card .lock{width:40px;height:40px;color:var(--terra);margin:0 auto 10px;}
+.lock-line{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px 14px;}
+.lock-line input{border:0;outline:0;background:transparent;font-family:var(--sans);font-size:14px;width:100%;letter-spacing:.14em;}
+.gate-card .btn{width:100%;justify-content:center;margin-top:12px;}
+.gate-err{display:none;color:#B3352B;font-size:12.5px;font-weight:600;margin-top:10px;}
+
+/* ---------- footer ---------- */
+.site-footer{margin-top:44px;padding:26px 0;border-top:1px solid var(--line-soft);color:var(--faint);font-size:12.5px;}
+.site-footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+.site-footer a{color:var(--terra);font-weight:700;}
+
+/* ---------- responsive ---------- */
+@media (max-width:960px){
+  .kpis{grid-template-columns:repeat(2,1fr);}
+  .grid-2,.grid-3{grid-template-columns:1fr;}
+}
+@media (max-width:520px){
+  .kpis{grid-template-columns:1fr 1fr;gap:12px;}
+  .kpi{padding:16px;}
+  .header-actions .btn-ghost span{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= VERROU ================= -->
+<div id="gate">
+  <div class="gate-card">
+    <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="11" width="16" height="10" rx="3"/>
+      <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+      <circle cx="12" cy="16" r="1.4" fill="currentColor" stroke="none"/>
+    </svg>
+    <img class="brand-mark" src="media/logo-round.png" alt="Madjo">
+    <h2>Tableau de bord</h2>
+    <p>Espace réservé à la boutique. Entrez le code d'accès.</p>
+    <div class="lock-line">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+      <input type="password" id="keyInput" placeholder="Code d'accès" autocomplete="off">
+    </div>
+    <button class="btn btn-terra" id="keyBtn">Ouvrir le tableau de bord</button>
+    <p class="gate-err" id="gateErr">Code incorrect.</p>
+  </div>
+</div>
+
+<!-- ================= PAGE ================= -->
+<div id="app" style="display:none;">
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="dashboard.html">
+        <img class="brand-mark" src="media/logo-round.png" alt="Madjo">
+        <div class="brand-name">Madjo<small>Tableau de bord</small></div>
+      </a>
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="index.html"><span>Voir le site</span>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <button class="btn btn-amber" id="refreshBtn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 3v5h-5"/></svg>
+          Actualiser
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="band">
+    <div class="wrap band-inner">
+      <span class="eyebrow">Espace barbier</span>
+      <h1>La boutique, <em>en un coup d'œil.</em></h1>
+      <p>Réservations, revenus et tendances — alimenté en direct par votre Google Sheet.</p>
+      <span class="live"><i></i> Données en direct</span>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <!-- KPI -->
+    <section class="kpis">
+      <div class="kpi">
+        <div class="kpi-label">Rendez-vous</div>
+        <div class="kpi-value" id="kpiTotal">0</div>
+        <div class="kpi-sub">au total, toutes périodes</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Revenu estimé</div>
+        <div class="kpi-value" id="kpiRevenue">0 <small>TND</small></div>
+        <div class="kpi-sub">somme des prestations</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Aujourd'hui</div>
+        <div class="kpi-value" id="kpiToday">0</div>
+        <div class="kpi-sub" id="kpiTodaySub">rendez-vous ce jour</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Panier moyen</div>
+        <div class="kpi-value" id="kpiAvg">0 <small>TND</small></div>
+        <div class="kpi-sub">par rendez-vous</div>
+      </div>
+    </section>
+
+    <!-- Ligne : flux quotidien -->
+    <section class="grid-2">
+      <div class="card" style="grid-column:1 / -1;">
+        <div class="card-head">
+          <div class="card-title">Activité quotidienne<small>Rendez-vous & revenu par jour</small></div>
+          <div class="pills" id="periodPills">
+            <button data-days="7">7 jours</button>
+            <button data-days="30" class="active">30 jours</button>
+            <button data-days="0">Tout</button>
+          </div>
+        </div>
+        <div class="chart-box tall"><canvas id="lineChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- Barre + Donut -->
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Prestations<small>Rendez-vous par service</small></div>
+        </div>
+        <div class="chart-box"><canvas id="barChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Revenu par barbier<small>Part de chaque fauteuil</small></div>
+        </div>
+        <div class="chart-box"><canvas id="donutChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- Table -->
+    <section class="card" style="margin-top:16px;">
+      <div class="card-head">
+        <div class="card-title">Détail des réservations<small>Dernières arrivées en premier</small></div>
+        <div class="filters">
+          <div class="search">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+            <input type="text" id="searchInput" placeholder="Rechercher (nom, réf, tél)…">
+          </div>
+          <select id="barberFilter">
+            <option value="">Tous les barbiers</option>
+            <option value="Madjo">Madjo</option>
+            <option value="Yassine">Yassine</option>
+            <option value="Mehdi">Mehdi</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th><th>Heure</th><th>Barbier</th><th>Service</th><th>Prix</th><th>Nom</th><th>Téléphone</th><th>Référence</th><th>Statut</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Madjo · Barbier · Hammam Chott — données depuis Google Sheets.</span>
+      <a href="index.html">← Retour au site</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const DASH_KEY = 'madjo2026';
+const APP_URL = 'https://script.google.com/macros/s/AKfycbwXo-pr5mpw6w7vClL50vvgt_6B47cd3ZuDK7-4GWKECTtW8AWWJyQJgCeVgvaU0bWW/exec';
+
+/* ================= état ================= */
+let rows = [];
+let period = 30;
+const charts = {};
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const fmtNum = n => (Math.round(n * 100) / 100).toLocaleString('fr-FR');
+const fmtTND = n => fmtNum(n) + ' TND';
+function todayKey() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function addDays(key, delta) {
+  const d = new Date(key + 'T00:00:00');
+  d.setDate(d.getDate() + delta);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+const MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+function fmtShort(key) {
+  const p = key.split('-');
+  return p[1] + '/' + p[2];
+}
+function fmtLong(key) {
+  const p = key.split('-');
+  return p[2] + ' ' + MONTHS[+p[1] - 1] + ' ' + p[0];
+}
+function priceOf(r) { const v = parseFloat(r.price); return isNaN(v) ? 0 : v; }
+function active() { return rows.filter(r => r.status !== 'cancelled'); }
+
+/* ---------- données ---------- */
+async function loadData(key) {
+  const res = await fetch(APP_URL + '?action=bookings&key=' + encodeURIComponent(key));
+  const json = await res.json();
+  if (!json.ok) throw new Error(json.error || 'erreur');
+  return json.rows || [];
+}
+
+/* ---------- rendu KPI ---------- */
+function renderKpis() {
+  const act = active();
+  const total = act.length;
+  const revenue = act.reduce((s, r) => s + priceOf(r), 0);
+  const tk = todayKey();
+  const today = act.filter(r => r.date === tk).length;
+  $('#kpiTotal').textContent = fmtNum(total);
+  $('#kpiRevenue').innerHTML = fmtNum(revenue) + ' <small>TND</small>';
+  $('#kpiToday').textContent = fmtNum(today);
+  $('#kpiTodaySub').textContent = today === 0 ? 'aucun pour aujourd\'hui' : 'rendez-vous aujourd\'hui';
+  $('#kpiAvg').innerHTML = (total ? fmtNum(revenue / total) : '0') + ' <small>TND</small>';
+}
+
+/* ---------- graphiques ---------- */
+function baseOpts() {
+  return {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { font: { family: 'Manrope', weight: 600 }, boxWidth: 14, boxHeight: 14, usePointStyle: true, pointStyle: 'circle', color: '#4A3A30' } },
+      tooltip: { backgroundColor: '#231611', titleFont: { family: 'Manrope', weight: 700 }, bodyFont: { family: 'Manrope' }, padding: 12, cornerRadius: 10 }
+    }
+  };
+}
+function drawLine() {
+  const box = $('#lineChart');
+  if (charts.line) charts.line.destroy();
+  const src = active();
+  const today = todayKey();
+  let end, start;
+  if (period === 0) {
+    end = src.length ? src.reduce((m, r) => r.date > m ? r.date : m, '') : today;
+    start = src.length ? src.reduce((m, r) => r.date < m ? r.date : m, end) : end;
+  } else {
+    end = today;
+    start = addDays(end, -(period - 1));
+  }
+  const days = [];
+  for (let d = start; d <= end; d = addDays(d, 1)) days.push(d);
+  const byDay = {};
+  src.forEach(r => { if (r.date >= start && r.date <= end) { byDay[r.date] = byDay[r.date] || [0, 0]; byDay[r.date][0]++; byDay[r.date][1] += priceOf(r); } });
+  const labels = days.map(fmtShort);
+  const counts = days.map(d => byDay[d] ? byDay[d][0] : 0);
+  const revs = days.map(d => byDay[d] ? byDay[d][1] : 0);
+  charts.line = new Chart(box, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Rendez-vous', data: counts, borderColor: '#BC5B3A', backgroundColor: 'rgba(188,91,58,.12)', fill: true, tension: .35, borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#BC5B3A', yAxisID: 'y' },
+        { label: 'Revenu (TND)', data: revs, borderColor: '#E2A63E', backgroundColor: 'rgba(226,166,62,.10)', borderDash: [5, 4], tension: .35, borderWidth: 2, pointRadius: 2, yAxisID: 'y1' }
+      ]
+    },
+    options: Object.assign(baseOpts(), {
+      scales: {
+        x: { grid: { display: false }, ticks: { maxTicksLimit: 12, font: { family: 'Manrope', size: 11 }, color: '#6B5A4A' } },
+        y: { beginAtZero: true, ticks: { precision: 0, font: { family: 'Manrope', size: 11 }, color: '#6B5A4A' }, grid: { color: 'rgba(36,26,20,.07)' } },
+        y1: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { font: { family: 'Manrope', size: 11 }, color: '#B08A4A' } }
+      }
+    })
+  });
+}
+function drawBar() {
+  const box = $('#barChart');
+  if (charts.bar) charts.bar.destroy();
+  const bySvc = {};
+  active().forEach(r => { bySvc[r.service || '—'] = (bySvc[r.service || '—'] || 0) + 1; });
+  const entries = Object.entries(bySvc).sort((a, b) => b[1] - a[1]);
+  const colors = ['#BC5B3A', '#E2A63E', '#6F6A44', '#4E7A4B', '#9E4528', '#E2D3B6'];
+  charts.bar = new Chart(box, {
+    type: 'bar',
+    data: {
+      labels: entries.map(e => e[0]),
+      datasets: [{ label: 'Rendez-vous', data: entries.map(e => e[1]), backgroundColor: entries.map((_, i) => colors[i % colors.length]), borderRadius: 8, maxBarThickness: 46 }]
+    },
+    options: Object.assign(baseOpts(), {
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#231611', padding: 12, cornerRadius: 10 } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Manrope', size: 11.5 }, color: '#6B5A4A' } },
+        y: { beginAtZero: true, ticks: { precision: 0, font: { family: 'Manrope', size: 11 }, color: '#6B5A4A' }, grid: { color: 'rgba(36,26,20,.07)' } }
+      }
+    })
+  });
+}
+function drawDonut() {
+  const box = $('#donutChart');
+  if (charts.donut) charts.donut.destroy();
+  const byB = {};
+  active().forEach(r => { byB[r.barber || '—'] = (byB[r.barber || '—'] || 0) + priceOf(r); });
+  const entries = Object.entries(byB);
+  const colors = ['#BC5B3A', '#E2A63E', '#6F6A44', '#9E4528', '#E2D3B6', '#4E7A4B'];
+  charts.donut = new Chart(box, {
+    type: 'doughnut',
+    data: {
+      labels: entries.map(e => e[0]),
+      datasets: [{ data: entries.map(e => e[1]), backgroundColor: entries.map((_, i) => colors[i % colors.length]), borderColor: '#FDF8EE', borderWidth: 3, hoverOffset: 8 }]
+    },
+    options: Object.assign(baseOpts(), {
+      cutout: '62%',
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: { callbacks: { label: c => ' ' + c.label + ' : ' + fmtTND(c.parsed) } }
+      }
+    })
+  });
+}
+
+/* ---------- table ---------- */
+function renderTable() {
+  const q = ($('#searchInput').value || '').trim().toLowerCase();
+  const bar = $('#barberFilter').value;
+  let list = rows.filter(r =>
+    (bar === '' || r.barber === bar) &&
+    (!q || (r.name + ' ' + r.ref + ' ' + r.phone).toLowerCase().indexOf(q) > -1)
+  );
+  list = list.slice().sort((a, b) => (b.date + ' ' + b.time).localeCompare(a.date + ' ' + a.time));
+  const tb = $('#tableBody');
+  if (!list.length) {
+    tb.innerHTML = '<tr><td colspan="9"><div class="empty">Aucune réservation' + (q || bar ? ' pour ce filtre' : ' pour le moment — les premières arriveront ici dès que des clients réservent.') + '.</div></td></tr>';
+    return;
+  }
+  const nameShort = n => n.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  tb.innerHTML = list.map(r => {
+    const pill = r.barber === 'Madjo' ? 'pill-terra' : r.barber === 'Yassine' ? 'pill-olive' : 'pill-green';
+    const cancelled = r.status === 'cancelled';
+    const statusPill = cancelled
+      ? '<span class="pill pill-cancelled">Annulé</span>'
+      : '<span class="pill pill-green">Confirmé</span>';
+    return '<tr' + (cancelled ? ' class="row-cancelled"' : '') + '>' +
+      '<td>' + fmtLong(r.date) + '</td>' +
+      '<td>' + r.time + '</td>' +
+      '<td><span class="pill ' + pill + '">' + r.barber + '</span></td>' +
+      '<td>' + r.service + '</td>' +
+      '<td class="price">' + fmtNum(priceOf(r)) + ' TND</td>' +
+      '<td>' + nameShort(r.name) + '</td>' +
+      '<td>' + r.phone + '</td>' +
+      '<td class="mono">' + r.ref + '</td>' +
+      '<td>' + statusPill + '</td>' +
+      '</tr>';
+  }).join('');
+}
+
+/* ---------- filtre barbier dynamique ---------- */
+function buildBarberFilter() {
+  const sel = $('#barberFilter');
+  const seen = [];
+  rows.forEach(r => { if (r.barber && seen.indexOf(r.barber) === -1) seen.push(r.barber); });
+  const keep = sel.value;
+  sel.innerHTML = '<option value="">Tous les barbiers</option>' +
+    seen.map(b => '<option value="' + b + '">' + b + '</option>').join('');
+  if (keep) sel.value = keep;
+}
+
+/* ---------- tout rendre ---------- */
+function renderAll() {
+  buildBarberFilter();
+  renderKpis();
+  drawLine();
+  drawBar();
+  drawDonut();
+  renderTable();
+}
+
+/* ---------- verrou ---------- */
+function getStoredKey() { try { return localStorage.getItem('madjo_dash_key') || ''; } catch (e) { return ''; } }
+function storeKey(k) { try { localStorage.setItem('madjo_dash_key', k); } catch (e) {} }
+
+async function enterWith(key) {
+  $('#gateErr').style.display = 'none';
+  const data = await loadData(key);
+  rows = data;
+  storeKey(key);
+  if (location.search) history.replaceState(null, '', location.pathname);
+  $('#gate').style.display = 'none';
+  $('#app').style.display = 'block';
+  renderAll();
+}
+
+function showGate() {
+  $('#app').style.display = 'none';
+  $('#gate').style.display = 'flex';
+}
+
+async function init() {
+  const fromUrl = new URLSearchParams(location.search).get('key');
+  const stored = getStoredKey();
+  const key = fromUrl || stored;
+  if (key) {
+    try { await enterWith(key); return; } catch (e) {}
+  }
+  showGate();
+  $('#keyInput').focus();
+}
+
+/* ---------- events ---------- */
+$('#keyBtn').addEventListener('click', async () => {
+  const v = $('#keyInput').value.trim();
+  if (!v) return;
+  try {
+    await enterWith(v);
+  } catch (e) {
+    $('#gateErr').textContent = e.message === 'unauthorized'
+      ? 'Code incorrect.'
+      : 'Impossible de joindre Google Sheets — vérifiez votre connexion, puis réessayez.';
+    $('#gateErr').style.display = 'block';
+    $('#keyInput').value = '';
+    $('#keyInput').focus();
+  }
+});
+$('#keyInput').addEventListener('keydown', e => { if (e.key === 'Enter') $('#keyBtn').click(); });
+$('#refreshBtn').addEventListener('click', async () => {
+  try {
+    rows = await loadData(getStoredKey());
+    renderAll();
+  } catch (e) {
+    showGate();
+  }
+});
+$('#searchInput').addEventListener('input', renderTable);
+$('#barberFilter').addEventListener('change', renderTable);
+document.querySelectorAll('#periodPills button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#periodPills button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    period = parseInt(b.dataset.days, 10);
+    drawLine();
+  });
+});
+
+init();
+</script>
+</body>
+</html>
