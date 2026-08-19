@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0e1a2b">
+<title>LEGO Hands — move bricks with your hand</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'%3E%3Crect x='2' y='2' width='60' height='28' rx='4' fill='%23d81e05'/%3E%3Ccircle cx='10' cy='11' r='4' fill='%23fff' opacity='.9'/%3E%3Ccircle cx='22' cy='11' r='4' fill='%23fff' opacity='.9'/%3E%3Ccircle cx='34' cy='11' r='4' fill='%23fff' opacity='.9'/%3E%3Ccircle cx='46' cy='11' r='4' fill='%23fff' opacity='.9'/%3E%3Ccircle cx='58' cy='11' r='4' fill='%23fff' opacity='.9'/%3E%3C/svg%3E">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; touch-action: none; }
+  body {
+    background: #0e1a2b;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #eaf2fb;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  canvas { position: fixed; inset: 0; display: block; }
+  video#cam {
+    position: fixed; left: -100px; top: -100px;
+    width: 1px; height: 1px;
+    opacity: 0; pointer-events: none;
+  }
+
+  /* ─── HUD ─────────────────────────────────────────── */
+  #hud {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 12px; pointer-events: none;
+    z-index: 10;
+  }
+  .logo { display: flex; align-items: center; gap: 8px; }
+  .logo svg { display: block; }
+  .logo b { font-size: 15px; letter-spacing: .3px; }
+  .chip {
+    pointer-events: auto;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(14,26,43,.72);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px; padding: 5px 11px;
+    font-size: 12px; color: #dbe6f5; white-space: nowrap;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: #64748b; }
+  .chip.on .dot { background: #34d399; box-shadow: 0 0 6px #34d399; }
+  .chip.warn .dot { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; }
+  #status { margin-left: auto; }
+  #actions { display: flex; gap: 8px; pointer-events: auto; margin-left: auto; }
+  #status:not(:empty) + #actions { margin-left: 8px; }
+  .hbtn {
+    min-width: 40px; height: 40px; border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(14,26,43,.72);
+    color: #eaf2fb; font-size: 16px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    transition: background .15s, transform .1s;
+  }
+  .hbtn:hover { background: rgba(40,62,94,.85); }
+  .hbtn:active { transform: scale(.94); }
+  .hbtn svg { display: block; }
+  .hbtn.off { opacity: .55; }
+
+  /* ─── Start overlay ───────────────────────────────── */
+  #overlay {
+    position: fixed; inset: 0; z-index: 50;
+    background: linear-gradient(160deg, #0e1a2b 0%, #132a44 55%, #1b3a5c 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    transition: opacity .35s;
+  }
+  #overlay.hidden { opacity: 0; pointer-events: none; }
+  .panel {
+    max-width: 420px; width: 100%;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 20px; padding: 26px 24px;
+    text-align: center;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .panel h1 { font-size: 26px; margin: 14px 0 6px; letter-spacing: .2px; }
+  .panel p { color: #a9bcd4; font-size: 13.5px; line-height: 1.55; }
+  .steps { text-align: left; margin: 18px 0; display: grid; gap: 10px; }
+  .step { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: #c6d6ea; line-height: 1.45; }
+  .step .n {
+    flex: 0 0 22px; height: 22px; border-radius: 50%;
+    background: #d81e05; color: #fff; font-weight: 700; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .bigbtn {
+    display: block; width: 100%;
+    padding: 15px; border: none; border-radius: 14px;
+    background: linear-gradient(135deg, #ef4444, #d81e05);
+    color: #fff; font-size: 16px; font-weight: 700; cursor: pointer;
+    letter-spacing: .4px;
+    box-shadow: 0 10px 30px rgba(216,30,5,.35);
+    transition: transform .1s, box-shadow .2s;
+  }
+  .bigbtn:hover { box-shadow: 0 14px 36px rgba(216,30,5,.45); }
+  .bigbtn:active { transform: scale(.97); }
+  .bigbtn[disabled] { opacity: .5; pointer-events: none; }
+  .linkbtn {
+    margin-top: 12px; background: none; border: none; color: #7fa3cc;
+    font-size: 12.5px; cursor: pointer; text-decoration: underline;
+  }
+  #ovErr { display: none; margin-top: 12px; color: #fca5a5; font-size: 12.5px; line-height: 1.5; }
+  #ovErr.show { display: block; }
+
+  /* ─── Help modal ──────────────────────────────────── */
+  #help {
+    position: fixed; inset: 0; z-index: 40;
+    background: rgba(5,12,22,.6);
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  #help.show { display: flex; }
+  #help .panel { text-align: left; }
+  #help h3 { margin: 0 0 10px; font-size: 18px; }
+  #help ul { padding-left: 18px; color: #c6d6ea; font-size: 13.5px; display: grid; gap: 8px; line-height: 1.5; }
+  #help .bigbtn { margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+<video id="cam" playsinline muted></video>
+
+<div id="hud">
+  <div class="logo" aria-hidden="true">
+    <svg width="38" height="19" viewBox="0 0 64 32"><rect x="2" y="2" width="60" height="28" rx="4" fill="#d81e05"/><circle cx="10" cy="11" r="4" fill="#fff" opacity=".9"/><circle cx="22" cy="11" r="4" fill="#fff" opacity=".9"/><circle cx="34" cy="11" r="4" fill="#fff" opacity=".9"/><circle cx="46" cy="11" r="4" fill="#fff" opacity=".9"/><circle cx="58" cy="11" r="4" fill="#fff" opacity=".9"/></svg>
+    <b>LEGO Hands</b>
+  </div>
+  <span class="chip" id="status"><span class="dot"></span><span id="statusTxt">Starting…</span></span>
+  <div id="actions">
+    <button class="hbtn" id="btnCam" title="Camera on/off">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+    </button>
+    <button class="hbtn" id="btnAdd" title="Add a brick (Space)">＋</button>
+    <button class="hbtn" id="btnReset" title="Reset bricks (R)">↺</button>
+    <button class="hbtn" id="btnHelp" title="Help">?</button>
+  </div>
+</div>
+
+<div id="overlay">
+  <div class="panel">
+    <svg width="76" height="38" viewBox="0 0 64 32" aria-hidden="true"><rect x="2" y="2" width="60" height="28" rx="4" fill="#d81e05"/><circle cx="10" cy="11" r="4" fill="#fff" opacity=".9"/><circle cx="22" cy="11" r="4" fill="#fff" opacity=".9"/><circle cx="34" cy="11" r="4" fill="#fff" opacity=".9"/><circle cx="46" cy="11" r="4" fill="#fff" opacity=".9"/><circle cx="58" cy="11" r="4" fill="#fff" opacity=".9"/></svg>
+    <h1>LEGO Hands</h1>
+    <p>Your camera tracks your hand in real time — the video is never shown, only your hand's position is used to move the bricks.</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span>Tap Start, then allow camera access. The feed stays invisible.</span></div>
+      <div class="step"><span class="n">2</span><span>Move your hand — a glowing ring follows your palm on screen.</span></div>
+      <div class="step"><span class="n">3</span><span>Pinch (thumb + index) over a brick to lift it, move, then open your pinch to drop.</span></div>
+      <div class="step"><span class="n">4</span><span>Pinch a brick in the bottom tray to pull out a new one. Or use mouse / touch.</span></div>
+    </div>
+    <button class="bigbtn" id="btnStart">Start hands</button>
+    <button class="linkbtn" id="btnSkip">No camera? Continue with mouse / touch</button>
+    <div id="ovErr"></div>
+  </div>
+</div>
+
+<div id="help">
+  <div class="panel">
+    <h3>How to play</h3>
+    <ul>
+      <li>Keep your hand in front of the camera (front camera, mirrored).</li>
+      <li>The ring follows your palm. Pinch thumb + index to grab.</li>
+      <li>Open the pinch to drop the brick — it falls and stacks.</li>
+      <li>Pull a brick from the tray at the bottom, or tap it to spawn one.</li>
+      <li>Desktop: move the mouse, hold the button to grab.</li>
+      <li>Needs HTTPS on a phone (camera access). GitHub Pages, a tunnel, or localhost works.</li>
+    </ul>
+    <button class="bigbtn" id="btnCloseHelp">Got it</button>
+  </div>
+</div>
+
+<script type="module">
+import { FilesetResolver, HandLandmarker } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
+
+/* ═══════════ setup ═══════════ */
+const cv = document.getElementById("cv");
+const ctx = cv.getContext("2d");
+const video = document.getElementById("cam");
+const overlay = document.getElementById("overlay");
+const ovErr = document.getElementById("ovErr");
+const statusChip = document.getElementById("status");
+const statusTxt = document.getElementById("statusTxt");
+const btnCam = document.getElementById("btnCam");
+const btnAdd = document.getElementById("btnAdd");
+const btnReset = document.getElementById("btnReset");
+const btnHelp = document.getElementById("btnHelp");
+const helpModal = document.getElementById("help");
+
+const STUD = 30;
+const TRAY_H = 104;
+const GRAVITY = 1500;
+const MAX_FALL = 950;
+const PINCH_CLOSE = 0.055;
+const PINCH_OPEN = 0.085;
+const GRAB_HOLD_MS = 90;
+
+let W = 0, H = 0, dpr = 1, floorY = 0;
+let camOn = false, videoReady = false, tracker = null, trackerReady = false;
+let stream = null;
+
+const bricks = [];
+const tray = [];
+let held = null;
+let grabDX = 0, grabDY = 0;
+
+const cursor = { x: 0, y: 0, tx: 0, ty: 0, active: false, pinch: false, source: "none", seenAt: 0 };
+const pinchState = { closed: false, holdT: 0 };
+
+const SIZES = [[4,2],[2,4],[2,2],[1,4],[1,2],[1,1],[3,2],[1,3]];
+const COLORS = ["#d81e05","#0065b3","#f5c400","#00a34c","#ff7800","#8e44ad","#009b9b","#e91e63","#f2f2f2"];
+
+/* ═══════════ resize ═══════════ */
+function resize() {
+  W = innerWidth; H = innerHeight; dpr = Math.min(2, devicePixelRatio || 1);
+  cv.width = W * dpr; cv.height = H * dpr;
+  cv.style.width = W + "px"; cv.style.height = H + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  floorY = H - TRAY_H - 26;
+  for (const b of bricks) b.x = Math.max(4, Math.min(W - b.w - 4, b.x));
+  layoutTray();
+}
+addEventListener("resize", resize);
+
+/* ═══════════ bricks ═══════════ */
+function makeBrick(c, r, color, x, y) {
+  return { c, r, w: c * STUD, h: r * STUD, color, x, y, vy: 0, settled: false };
+}
+function randBrick() {
+  const [c, r] = SIZES[(Math.random() * SIZES.length) | 0];
+  return makeBrick(c, r, COLORS[(Math.random() * COLORS.length) | 0], 0, 0);
+}
+
+function layoutTray() {
+  tray.length = 0;
+  const defs = [[2,2,"#0065b3"],[1,2,"#f5c400"],[1,1,"#d81e05"],[2,2,"#00a34c"],[1,2,"#ff7800"],[1,1,"#8e44ad"]];
+  let x = 18;
+  const cy = H - TRAY_H / 2;
+  for (const [c, r, color] of defs) {
+    const b = makeBrick(c, r, color, x, cy - (r * STUD) / 2);
+    tray.push(b);
+    x += b.w + 14;
+  }
+}
+
+function resetBricks() {
+  bricks.length = 0;
+  held = null;
+  const base = makeBrick(4, 2, "#d81e05", W / 2 - 60, 0);
+  base.y = floorY - base.h;
+  const mid = makeBrick(2, 2, "#f5c400", W / 2 - 30, 0);
+  mid.y = base.y - mid.h;
+  const top = makeBrick(1, 1, "#0065b3", W / 2 - 15, 0);
+  top.y = mid.y - top.h;
+  bricks.push(base, mid, top);
+}
+
+function spawnFalling() {
+  const b = randBrick();
+  b.x = 30 + Math.random() * Math.max(10, W - b.w - 60);
+  b.y = -b.h - 10;
+  b.vy = 60;
+  bricks.push(b);
+}
+
+/* ═══════════ tray hit ═══════════ */
+function trayAt(px, py) {
+  for (const b of tray) {
+    if (px >= b.x && px <= b.x + b.w && py >= b.y && py <= b.y + b.h) return b;
+  }
+  return null;
+}
+
+/* ═══════════ physics ═══════════ */
+function updatePhysics(dt) {
+  for (const b of bricks) {
+    if (b === held) continue;
+    if (b.settled) continue;
+    b.vy = Math.min(MAX_FALL, b.vy + GRAVITY * dt);
+    b.y += b.vy * dt;
+    let landed = false;
+    if (b.y + b.h >= floorY) { b.y = floorY - b.h; b.vy = 0; landed = true; }
+    if (!landed) {
+      for (const o of bricks) {
+        if (o === b || o === held || o.vy > 0 && !o.settled) continue;
+        const ox = Math.max(b.x, o.x), ox2 = Math.min(b.x + b.w, o.x + o.w);
+        if (ox2 - ox < 6) continue;
+        if (b.y + b.h >= o.y && b.y + b.h <= o.y + o.h * 0.6 + 8) {
+          b.y = o.y - b.h; b.vy = 0; landed = true; break;
+        }
+      }
+    }
+    if (landed) b.settled = true;
+  }
+}
+
+/* ═══════════ hand tracking ═══════════ */
+async function initTracker() {
+  try {
+    const vision = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm");
+    const opts = {
+      baseOptions: { modelAssetPath: "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task", delegate: "GPU" },
+      runningMode: "VIDEO", numHands: 1
+    };
+    try { tracker = await HandLandmarker.createFromOptions(vision, opts); }
+    catch { opts.baseOptions.delegate = "CPU"; tracker = await HandLandmarker.createFromOptions(vision, opts); }
+    trackerReady = true;
+  } catch (e) {
+    ovErr.textContent = "Could not load the hand-tracking model (check internet). Mouse / touch still works.";
+    ovErr.classList.add("show");
+  }
+}
+
+async function startCamera() {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user", width: { ideal: 640 }, height: { ideal: 480 } },
+      audio: false
+    });
+    video.srcObject = stream;
+    await video.play();
+    videoReady = true;
+    camOn = true;
+    btnCam.classList.remove("off");
+    return true;
+  } catch (e) {
+    ovErr.textContent = "Camera access was denied or unavailable. You can still play with mouse / touch.";
+    ovErr.classList.add("show");
+    return false;
+  }
+}
+
+function stopCamera() {
+  if (stream) stream.getTracks().forEach(t => t.stop());
+  stream = null; videoReady = false; camOn = false;
+  btnCam.classList.add("off");
+}
+
+function handFrame(now) {
+  if (!tracker || !videoReady) return;
+  let res;
+  try { res = tracker.detectForVideo(video, now); } catch { return; }
+  if (!res.landmarks || !res.landmarks.length) return;
+  const lm = res.landmarks[0];
+  const px = lm[9], thumb = lm[4], index = lm[8];
+  cursor.tx = (1 - px.x) * W;
+  cursor.ty = px.y * H;
+  cursor.active = true;
+  cursor.source = "hand";
+  cursor.seenAt = now;
+  const d = Math.hypot(thumb.x - index.x, thumb.y - index.y);
+  updatePinch(d, now);
+}
+
+function updatePinch(d, now) {
+  const st = pinchState;
+  if (!st.closed) {
+    if (d < PINCH_CLOSE) {
+      st.holdT = (st.holdT || now) ;
+      if (now - st.holdT >= GRAB_HOLD_MS) {
+        st.closed = true;
+        st.holdT = 0;
+        cursor.pinch = true;
+        tryGrab();
+      }
+    } else st.holdT = 0;
+  } else {
+    if (d > PINCH_OPEN) releaseHeld();
+    else tryGrab();
+  }
+}
+
+function tryGrab() {
+  if (held) {
+    held.x = cursor.x - grabDX;
+    held.y = cursor.y - grabDY;
+    return;
+  }
+  const tb = trayAt(cursor.x, cursor.y);
+  if (tb) {
+    const b = makeBrick(tb.c, tb.r, tb.color, cursor.x - tb.w / 2, cursor.y - tb.h / 2);
+    bricks.push(b);
+    held = b; grabDX = b.w / 2; grabDY = b.h / 2;
+    return;
+  }
+  for (let i = bricks.length - 1; i >= 0; i--) {
+    const b = bricks[i];
+    if (cursor.x >= b.x && cursor.x <= b.x + b.w && cursor.y >= b.y && cursor.y <= b.y + b.h) {
+      held = b; grabDX = cursor.x - b.x; grabDY = cursor.y - b.y;
+      b.settled = false; b.vy = 0;
+      return;
+    }
+  }
+}
+
+function releaseHeld() {
+  if (!held) return;
+  held.settled = false; held.vy = 0;
+  held = null;
+  pinchState.closed = false;
+  pinchState.holdT = 0;
+  cursor.pinch = false;
+}
+
+/* ═══════════ main loop ═══════════ */
+let last = performance.now();
+function loop(now) {
+  const dt = Math.min(0.033, (now - last) / 1000);
+  last = now;
+  if (camOn) handFrame(now);
+
+  const k = 1 - Math.exp(-dt * 11);
+  cursor.x += (cursor.tx - cursor.x) * k;
+  cursor.y += (cursor.ty - cursor.y) * k;
+  if (now - cursor.seenAt > 350) cursor.active = false;
+
+  if (held) {
+    held.x = Math.max(4, Math.min(W - held.w - 4, cursor.x - grabDX));
+    held.y = cursor.y - grabDY;
+  }
+  updatePhysics(dt);
+  draw(now);
+  updateStatus(now);
+  requestAnimationFrame(loop);
+}
+
+/* ═══════════ status ═══════════ */
+let lastStatus = "";
+function updateStatus(now) {
+  let s;
+  if (!camOn) s = "Camera off";
+  else if (now - cursor.seenAt > 700) s = "Move your hand into view";
+  else if (cursor.pinch && held) s = "Brick lifted — open pinch to drop";
+  else if (cursor.pinch) s = "Pinch over a brick to lift it";
+  else s = "Hand detected — pinch to grab";
+  if (s !== lastStatus) { lastStatus = s; statusTxt.textContent = s; }
+  statusChip.classList.toggle("on", camOn && now - cursor.seenAt <= 700);
+  statusChip.classList.toggle("warn", !camOn);
+}
+
+/* ═══════════ drawing ═══════════ */
+function drawBrick(b, opts = {}) {
+  const { x, y, w, h, color } = b;
+  ctx.save();
+  if (opts.shadow) {
+    ctx.shadowColor = "rgba(10,20,35,.35)";
+    ctx.shadowBlur = 18; ctx.shadowOffsetY = 8;
+  } else {
+    ctx.shadowColor = "rgba(10,20,35,.16)";
+    ctx.shadowBlur = 4; ctx.shadowOffsetY = 2;
+  }
+  roundRect(x, y, w, h, 7);
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.shadowColor = "transparent";
+  ctx.strokeStyle = "rgba(0,0,0,.22)";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.fillStyle = "rgba(255,255,255,.28)";
+  roundRect(x + 2, y + 2, w - 4, 3.5, 2); ctx.fill();
+  ctx.fillStyle = "rgba(0,0,0,.14)";
+  roundRect(x + 2, y + h - 5.5, w - 4, 3.5, 2); ctx.fill();
+  ctx.fillStyle = "rgba(255,255,255,.16)";
+  roundRect(x + 2, y + 2, 3.5, h - 4, 2); ctx.fill();
+  for (let j = 0; j < b.r; j++) {
+    for (let i = 0; i < b.c; i++) {
+      const cx = x + (i + 0.5) * STUD, cy = y + (j + 0.5) * STUD, r = STUD * 0.29;
+      const g = ctx.createRadialGradient(cx - r * 0.4, cy - r * 0.5, r * 0.15, cx, cy, r);
+      g.addColorStop(0, "rgba(255,255,255,.85)");
+      g.addColorStop(0.35, "rgba(255,255,255,.18)");
+      g.addColorStop(1, "rgba(0,0,0,.14)");
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+function draw(now) {
+  const sky = ctx.createLinearGradient(0, 0, 0, H);
+  sky.addColorStop(0, "#bfe0f7");
+  sky.addColorStop(1, "#e8f4fc");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.strokeStyle = "rgba(120,160,190,.12)";
+  ctx.lineWidth = 1;
+  for (let x = 0.5; x < W; x += 30) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, floorY); ctx.stroke(); }
+  for (let y = 0.5; y < floorY; y += 30) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+  ctx.fillStyle = "#dbe9f5";
+  ctx.fillRect(0, floorY, W, H - floorY);
+  ctx.fillStyle = "rgba(0,0,0,.14)";
+  ctx.fillRect(0, floorY, W, 3);
+
+  for (const b of bricks) if (b !== held) drawBrick(b);
+  if (held) drawBrick(held, { shadow: true });
+
+  ctx.fillStyle = "rgba(255,255,255,.82)";
+  roundRect(10, H - TRAY_H + 8, W - 20, TRAY_H - 16, 16); ctx.fill();
+  ctx.strokeStyle = "rgba(30,50,75,.18)"; ctx.lineWidth = 1.5; ctx.stroke();
+  ctx.fillStyle = "rgba(30,50,75,.55)";
+  ctx.font = "600 11px 'Segoe UI', Arial, sans-serif";
+  ctx.textAlign = "left"; ctx.textBaseline = "top";
+  ctx.fillText("TRAY — pinch a brick to pull it out, or tap it", 22, H - TRAY_H + 20);
+  for (const b of tray) drawBrick(b);
+
+  const ringA = cursor.active ? 1 : 0.25;
+  if (cursor.source === "hand" || cursor.source === "mouse") {
+    ctx.save();
+    ctx.globalAlpha = ringA;
+    const r = cursor.pinch ? 20 : 26;
+    ctx.beginPath(); ctx.arc(cursor.x, cursor.y, r, 0, 7);
+    ctx.strokeStyle = cursor.pinch ? "#ef4444" : "#0e7490";
+    ctx.lineWidth = cursor.pinch ? 5 : 3.5;
+    ctx.stroke();
+    if (cursor.pinch) {
+      ctx.beginPath(); ctx.arc(cursor.x, cursor.y, 8, 0, 7);
+      ctx.fillStyle = "#ef4444"; ctx.fill();
+    } else {
+      ctx.beginPath(); ctx.arc(cursor.x, cursor.y, 3.5, 0, 7);
+      ctx.fillStyle = "#0e7490"; ctx.fill();
+    }
+    ctx.restore();
+  }
+}
+
+/* ═══════════ pointer fallback ═══════════ */
+let pointerDown = false, moved = false, downAt = { x: 0, y: 0 };
+
+function pointerMove(e) {
+  const rect = cv.getBoundingClientRect();
+  cursor.tx = (e.clientX - rect.left) * (W / rect.width);
+  cursor.ty = (e.clientY - rect.top) * (H / rect.height);
+  cursor.active = true;
+  cursor.source = "mouse";
+  cursor.seenAt = performance.now();
+  if (Math.hypot(cursor.tx - downAt.x, cursor.ty - downAt.y) > 7) moved = true;
+}
+function onPointerDown(e) {
+  pointerDown = true; moved = false;
+  downAt.x = cursor.tx; downAt.y = cursor.ty;
+  cursor.pinch = true;
+  pinchState.closed = true;
+  tryGrab();
+}
+function pointerUp(e) {
+  if (!moved && !held) {
+    const tb = trayAt(cursor.x, cursor.y);
+    if (tb) { spawnFalling(); return; }
+  }
+  pointerDown = false;
+  releaseHeld();
+}
+
+addEventListener("pointermove", pointerMove);
+addEventListener("pointerdown", onPointerDown);
+addEventListener("pointerup", pointerUp);
+addEventListener("pointercancel", () => { pointerDown = false; releaseHeld(); });
+
+/* ═══════════ UI wiring ═══════════ */
+document.getElementById("btnStart").addEventListener("click", async (e) => {
+  const btn = e.currentTarget;
+  btn.disabled = true; btn.textContent = "Starting…";
+  const ok = await startCamera();
+  if (ok) {
+    overlay.classList.add("hidden");
+    setTimeout(() => { overlay.style.display = "none"; }, 400);
+  }
+  btn.disabled = false; btn.textContent = "Start hands";
+});
+document.getElementById("btnSkip").addEventListener("click", () => {
+  overlay.classList.add("hidden");
+  setTimeout(() => { overlay.style.display = "none"; }, 400);
+  statusTxt.textContent = "Mouse / touch mode";
+});
+btnCam.addEventListener("click", () => { camOn ? stopCamera() : startCamera(); });
+btnAdd.addEventListener("click", spawnFalling);
+btnReset.addEventListener("click", resetBricks);
+btnHelp.addEventListener("click", () => helpModal.classList.add("show"));
+document.getElementById("btnCloseHelp").addEventListener("click", () => helpModal.classList.remove("show"));
+addEventListener("keydown", (e) => {
+  if (e.key === " " || e.key === "Spacebar") { e.preventDefault(); spawnFalling(); }
+  if (e.key === "r" || e.key === "R") resetBricks();
+});
+
+/* ═══════════ go ═══════════ */
+resize();
+resetBricks();
+initTracker();
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
